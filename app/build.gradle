@@ -1,0 +1,75 @@
+apply plugin: 'com.android.application'
+apply plugin: "com.jaredsburrows.spoon"
+
+//def paranoid = "on"
+def paranoid = "off"
+
+def propFile = new File('app/signature/sign.config')
+Properties props = new Properties()
+props.load(new FileInputStream(propFile))
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.example.alex.collectionsandmap"
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField "boolean", "SHOW_LOGS", "true"
+    }
+
+    signingConfigs {
+        release {
+            storeFile = file(props['STORE_FILE'])
+            storePassword = props['STORE_PASSWORD']
+            keyAlias = props['KEY_ALIAS']
+            keyPassword = props['KEY_PASSWORD']
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            buildConfigField "boolean", "SHOW_LOGS", "false"
+        }
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+repositories {
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+}
+
+spoon {
+    grantAll = true
+//    codeCoverage = true
+}
+
+if (paranoid == "on") {
+    apply plugin: 'io.michaelrocks.paranoid'
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:support-v4:27.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compileOnly 'io.michaelrocks:paranoid-core:0.1.7'
+    implementation 'org.mockito:mockito-core:2.8.47'
+    androidTestImplementation 'com.squareup.spoon:spoon-client:2.0.0-SNAPSHOT'
+    androidTestImplementation 'com.squareup.spoon:spoon-client:1.6.4'
+    implementation 'com.android.support:design:27.0.2'
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+}

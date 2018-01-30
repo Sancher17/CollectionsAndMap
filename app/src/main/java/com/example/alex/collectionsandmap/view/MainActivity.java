@@ -1,12 +1,16 @@
 package com.example.alex.collectionsandmap.view;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import butterknife.BindView;
@@ -15,11 +19,16 @@ import butterknife.OnClick;
 
 import com.example.alex.collectionsandmap.R;
 import com.example.alex.collectionsandmap.adapter.PagerAdapter;
+import com.example.alex.collectionsandmap.presenter.Presenter;
 import com.example.alex.collectionsandmap.utils.Logger;
+
+import static java.lang.Integer.parseInt;
 
 public class MainActivity extends AppCompatActivity {
 
     private static Logger LOGGER = new Logger(MainActivity.class);
+
+    private Presenter presenter = new Presenter();
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -32,6 +41,9 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.button_calculate)
     Button buttonCalculate;
+
+    @BindView(R.id.editText_input)
+    EditText input;
 
     PagerAdapter adapter;
 
@@ -51,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         adapter = new PagerAdapter (getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
 
-        /**As you can see that, above we have used the Android Toolbar instead of action bar and tabs are further added in the TabLayout through code with text. Then you can see that ViewPager is attached with an adapter using the ViewPager.setAdapter(adapter) method. Next Android ViewPager is attached to a page change listener of TabLayout by using the method ViewPager.addOnPageChangeListener. Further the Android TabLayout is attached to a tab selected listener using the TabLayout.setOnTabSelectedListener method, in which ViewPager’s page is set when a tab is selected.*/
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -80,6 +91,16 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.button_calculate)
     void onSaveClick() {
-        Toast.makeText(this, "Hi", Toast.LENGTH_LONG).show();
+        LOGGER.log("onSaveClick");
+        Presenter.INPUT_NUMBER = parseInt(input.getText().toString());
+        LOGGER.log("onSaveClick / Presenter.INPUT_NUMBER " + Presenter.INPUT_NUMBER);
+        presenter.inputData();
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null){
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        }
     }
 }

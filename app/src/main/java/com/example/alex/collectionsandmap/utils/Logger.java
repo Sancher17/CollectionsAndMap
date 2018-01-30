@@ -19,7 +19,7 @@ public class Logger {
 
     public void log(String message) {
         if (isLogging)
-            Log.d(logTag, message);
+            Log.d("LOGGER / " +logTag, message);
     }
 
     public void error(Throwable message) {

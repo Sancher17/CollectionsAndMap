@@ -16,7 +16,8 @@ public class FragmentTab1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
+        GridLayout grid = new GridLayout(3, 3, 10, 10);
+//https://www.journaldev.com/13792/android-gridlayoutmanager-example
 
         return inflater.inflate(R.layout.fragment_tab1, container, false);
     }

@@ -2,7 +2,7 @@ package com.example.alex.collectionsandmap.model;
 
 import java.util.List;
 
-import static com.example.alex.collectionsandmap.presenter.Presenter.INPUT_NUMBER;
+import static com.example.alex.collectionsandmap.presenter.PresenterCollections.INPUT_NUMBER;
 
 public class MyData {
 

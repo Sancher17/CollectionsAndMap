@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -19,7 +18,7 @@ import butterknife.OnClick;
 
 import com.example.alex.collectionsandmap.R;
 import com.example.alex.collectionsandmap.adapter.PagerAdapter;
-import com.example.alex.collectionsandmap.presenter.Presenter;
+import com.example.alex.collectionsandmap.presenter.PresenterCollections;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 import static java.lang.Integer.parseInt;
@@ -28,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static Logger LOGGER = new Logger(MainActivity.class);
 
-    private Presenter presenter = new Presenter();
+    private PresenterCollections presenter = new PresenterCollections();
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -89,18 +88,24 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.button_calculate)
-    void onSaveClick() {
-        LOGGER.log("onSaveClick");
-        Presenter.INPUT_NUMBER = parseInt(input.getText().toString());
-        LOGGER.log("onSaveClick / Presenter.INPUT_NUMBER " + Presenter.INPUT_NUMBER);
-        presenter.inputData();
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-            if (imm != null){
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            }
-        }
-    }
+//    @OnClick(R.id.button_calculate)
+//    void onSaveClick() {
+//        LOGGER.log("onSaveClick");
+//
+//        if (input.getText() != null){
+//            PresenterCollections.INPUT_NUMBER = parseInt(input.getText().toString());
+//            LOGGER.log("onSaveClick / PresenterCollections.INPUT_NUMBER " + PresenterCollections.INPUT_NUMBER);
+//            presenter.inputData();
+//            View view = this.getCurrentFocus();
+//            if (view != null) {
+//                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+//                if (imm != null){
+//                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+//                }
+//        }
+//
+//
+//
+//        }
+//    }
 }

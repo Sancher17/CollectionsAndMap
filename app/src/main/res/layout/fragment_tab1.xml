@@ -1,55 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:id="@+id/frag1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/tab_1"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <GridLayout
         android:id="@+id/gridLayoutTab1"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
+        android:columnCount="4"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:columnCount = "4" 
-        android:orientation = "horizontal">
-        
-        <TextView 
-        android:id="@+id/text1"
-        android:text="1" 
-        android:layout_gravity="left|top"/>
-        <Button android:text="1" />
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <TextView
+            android:id="@+id/text1"
+            android:text="" />
+
+        <Button
+            android:id="@+id/but1111"
+            android:text="ArrayL" />
+
+        <Button android:text="LinkedL" />
+        <Button android:text="COWArr" />
+        <Button android:text="AddSt" />
+
+        <Button
+            android:id="@+id/but1"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/but2"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/but3"
+            android:text="3" />
+
+        <Button android:text="AddMidd" />
+
+        <Button android:text="3" />
+
+        <Button android:text="3" />
+
         <Button android:text="2" />
+
+        <Button android:text="AddEnd" />
+
+
+        <Button android:text="3" />
+        <Button android:text="3" />
+
+        <Button android:text="2" />
+
+        <Button android:text="Search" />
+
+        <Button android:text="3" />
+        <Button android:text="3" />
+        <Button android:text="3" />
+        <Button android:text="DelSt" />
+        <Button android:text="3" />
+        <Button android:text="3" />
+        <Button android:text="3" />
+        <Button android:text="DelMid" />
         <Button android:text="3" />
         <Button android:text="2" />
         <Button android:text="3" />
-        <Button android:text="2" />
+        <Button android:text="DelEnd" />
+        <Button android:text="3" />
         <Button android:text="3" />
         <Button android:text="2" />
-        <Button android:text="3" />
-        
+
+
 
     </GridLayout>
 
 
 </android.support.constraint.ConstraintLayout>
 
-//http://www.techotopia.com/index.php/Working_with_the_Android_GridLayout_in_XML_Layout_Resources
+    <!--//http://www.techotopia.com/index.php/Working_with_the_Android_GridLayout_in_XML_Layout_Resources-->

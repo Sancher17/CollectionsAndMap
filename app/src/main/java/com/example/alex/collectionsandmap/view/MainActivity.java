@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,11 +19,16 @@ import butterknife.OnClick;
 
 import com.example.alex.collectionsandmap.R;
 import com.example.alex.collectionsandmap.adapter.PagerAdapter;
+import com.example.alex.collectionsandmap.model.CollectionsData;
 import com.example.alex.collectionsandmap.presenter.PresenterCollections;
 import com.example.alex.collectionsandmap.utils.Logger;
 
+import org.androidannotations.annotations.EActivity;
+
 import static java.lang.Integer.parseInt;
 
+
+@EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
 
     private static Logger LOGGER = new Logger(MainActivity.class);
@@ -46,12 +52,18 @@ public class MainActivity extends AppCompatActivity {
 
     PagerAdapter adapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        LOGGER.log("MainActivity started");
+        int cpu = Runtime.getRuntime().availableProcessors();
+        LOGGER.log("CPU " + cpu);
+
+        
         setSupportActionBar(toolbar);
 
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_1));
@@ -59,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        adapter = new PagerAdapter (getSupportFragmentManager(), tabLayout.getTabCount());
+        adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
 
 
@@ -77,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                LOGGER.log("onTabUnselected // getPosition " + String.valueOf(tab.getPosition()) );
+                LOGGER.log("onTabUnselected // getPosition " + String.valueOf(tab.getPosition()));
             }
 
             @Override
@@ -85,6 +97,13 @@ public class MainActivity extends AppCompatActivity {
                 LOGGER.log("onTabReselected");
             }
         });
+
+    }
+
+    @OnClick(R.id.button_calculate)
+    void onSaveClick() {
+        LOGGER.log("onSaveClick called");
+        presenter.calculate();
 
     }
 

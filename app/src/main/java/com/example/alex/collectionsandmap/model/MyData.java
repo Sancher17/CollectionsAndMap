@@ -1,17 +1,24 @@
 package com.example.alex.collectionsandmap.model;
 
+import com.example.alex.collectionsandmap.BackgroundTask;
+import com.example.alex.collectionsandmap.utils.Logger;
+
 import java.util.List;
 
 import static com.example.alex.collectionsandmap.presenter.PresenterCollections.INPUT_NUMBER;
 
 public class MyData {
 
+    private static Logger LOGGER = new Logger(MyData.class);
+
     public int addToStart(List<Integer> list) {
+        LOGGER.log("addToStart called");
         list.clear();
         long t1 = System.currentTimeMillis();
         for (int i = 0; i < INPUT_NUMBER; i++) {
             list.add(0, i);
         }
+        LOGGER.log("addToStart // result: "+String.valueOf(System.currentTimeMillis() - t1));
         return (int) (System.currentTimeMillis() - t1);
     }
 

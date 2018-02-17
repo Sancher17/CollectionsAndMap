@@ -1,25 +1,20 @@
-package com.example.alex.collectionsandmap;
+package com.example.alex.collectionsandmap.BackgroundWork.AsyncTask;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.alex.collectionsandmap.model.CollectionsData;
-import com.example.alex.collectionsandmap.model.MyData;
+import com.example.alex.collectionsandmap.model.CollectionsUtil;
 import com.example.alex.collectionsandmap.utils.Logger;
 import com.example.alex.collectionsandmap.view.FragmentTab1;
-import com.example.alex.collectionsandmap.view.MainActivity;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class MyTask extends AsyncTask <Void, Void, Void> {
+public class MyAsyncTask extends AsyncTask <Void, Void, Void> {
 
-    private static Logger LOGGER = new Logger(MyTask.class);
+    private static Logger LOGGER = new Logger(MyAsyncTask.class);
 
-    MyData myData = new MyData();
     ArrayList al = new ArrayList();
     LinkedList ll = new LinkedList();
     CopyOnWriteArrayList cow = new CopyOnWriteArrayList();
@@ -29,7 +24,7 @@ public class MyTask extends AsyncTask <Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         LOGGER.log("doInBackground called");
-        CollectionsData.list.get(0).setResultOfCalculation(myData.addToStart(al));
+        CollectionsData.list.get(0).setResultOfCalculation(CollectionsUtil.addToStart(al));
         return null;
     }
 
@@ -40,15 +35,14 @@ public class MyTask extends AsyncTask <Void, Void, Void> {
         CollectionsData.list.get(1).setFlag(0);
         CollectionsData.list.get(2).setFlag(0);
         FragmentTab1.adapter.notifyDataSetChanged();
-//        Toast.makeText(context,"Let is start", Toast.LENGTH_LONG).show();
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         LOGGER.log("onPostExecute called");
         CollectionsData.list.get(0).setFlag(1);
-        CollectionsData.list.get(1).setFlag(1);
-        CollectionsData.list.get(2).setFlag(1);
+        CollectionsData.list.get(1).setFlag(0);
+        CollectionsData.list.get(2).setFlag(0);
         FragmentTab1.adapter.notifyDataSetChanged();
     }
 }

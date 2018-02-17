@@ -1,51 +1,31 @@
 package com.example.alex.collectionsandmap.presenter;
 
-import android.content.Context;
-
-import com.example.alex.collectionsandmap.BackgroundTask;
-import com.example.alex.collectionsandmap.MyCallback;
-import com.example.alex.collectionsandmap.MyClass;
-import com.example.alex.collectionsandmap.MyTask;
-import com.example.alex.collectionsandmap.adapter.CollectionsAdapter;
-import com.example.alex.collectionsandmap.model.CollectionsData;
-import com.example.alex.collectionsandmap.model.MyData;
+import com.example.alex.collectionsandmap.BackgroundWork.ExecutorService.ExecutorTaskCollection;
+import com.example.alex.collectionsandmap.BackgroundWork.ExecutorService.ExecutorTaskMap;
 import com.example.alex.collectionsandmap.utils.Logger;
-import com.example.alex.collectionsandmap.view.FragmentTab1;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
+import static com.example.alex.collectionsandmap.view.MainActivity.GET_POSITION_TAB;
 
-public class PresenterCollections {
+public class Presenter {
 
-    /****/
-    private BackgroundTask backgroundTask = new BackgroundTask();
-    private MyClass myClass = new MyClass();
-    /****/
-
-    public static boolean PROGRESS = false;
-    public static int INPUT_NUMBER = 100000;
-    private static Logger LOGGER = new Logger(PresenterCollections.class);
-
-//    private CollectionsData collections = new CollectionsData();
-
-    private ArrayList al = new ArrayList();
-    private LinkedList ll = new LinkedList();
-    private CopyOnWriteArrayList cowal = new CopyOnWriteArrayList();
-
-    private MyData myData = new MyData();
+    private static Logger LOGGER = new Logger(Presenter.class);
+    private ExecutorTaskCollection collection = new ExecutorTaskCollection();
+    private ExecutorTaskMap map = new ExecutorTaskMap();
 
 
     public void calculate() {
         LOGGER.log("calculate called");
+
+        if (GET_POSITION_TAB == 0){
+            collection.doTask();
+        }else {
+            map.doTask();
+        }
+    }
+}
+
+
+/**heap*/
 //        LOGGER.log("flag " + CollectionsData.list.get(0).getFlag());
 //        CollectionsData.list.get(0).setFlag(0);
 //        CollectionsData.list.get(1).setFlag(0);
@@ -54,7 +34,7 @@ public class PresenterCollections {
 //        FragmentTab1.adapter.notifyDataSetChanged();
 
         /** решение с AsyncTysk все работатет start*/
-//        myTask = new MyTask();
+//        myTask = new MyAsyncTask();
 //        myTask.execute();
         /**end*/
 
@@ -145,11 +125,11 @@ public class PresenterCollections {
 
         /**Решение с Callback*/
 //        LOGGER.log("BEFORE registerCallback() ");
-//        backgroundTask.registerCallback(myClass);
+//        collection.registerCallback(ft1);
 //        LOGGER.log("BEFORE doTask() ");
-        backgroundTask.doTask1();
-        /**end*/
+//        collection.doTask();
+//        /**end*/
 
-
-    }
-}
+//
+//    }
+//}

@@ -3,7 +3,6 @@ package com.example.alex.collectionsandmap.view;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,27 +12,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.alex.collectionsandmap.R;
+import com.example.alex.collectionsandmap.adapter.PagerAdapter;
+import com.example.alex.collectionsandmap.model.MapsUtil;
+import com.example.alex.collectionsandmap.presenter.Presenter;
+import com.example.alex.collectionsandmap.utils.Logger;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import com.example.alex.collectionsandmap.R;
-import com.example.alex.collectionsandmap.adapter.PagerAdapter;
-import com.example.alex.collectionsandmap.model.CollectionsData;
-import com.example.alex.collectionsandmap.presenter.PresenterCollections;
-import com.example.alex.collectionsandmap.utils.Logger;
 
-import org.androidannotations.annotations.EActivity;
-
-import static java.lang.Integer.parseInt;
-
-
-@EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
 
     private static Logger LOGGER = new Logger(MainActivity.class);
+    private Presenter presenter = new Presenter();
+    public static int GET_POSITION_TAB = 0;
+    public static int INPUT_NUMBER;
 
-    private PresenterCollections presenter = new PresenterCollections();
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -63,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         int cpu = Runtime.getRuntime().availableProcessors();
         LOGGER.log("CPU " + cpu);
 
-        
+
         setSupportActionBar(toolbar);
 
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_1));
@@ -73,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
-
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -85,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 LOGGER.log("onTabSelected // setTitle " + tab.getText());
                 viewPager.setCurrentItem(tab.getPosition());
                 LOGGER.log("onTabSelected // getPosition " + String.valueOf(tab.getPosition()));
+                GET_POSITION_TAB = tab.getPosition();
             }
 
             @Override
@@ -97,34 +93,25 @@ public class MainActivity extends AppCompatActivity {
                 LOGGER.log("onTabReselected");
             }
         });
-
     }
 
     @OnClick(R.id.button_calculate)
     void onSaveClick() {
-        LOGGER.log("onSaveClick called");
-        presenter.calculate();
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        }
+        String number = input.getText().toString();
+        if (number.length() > 0 ) {
+            INPUT_NUMBER = Integer.parseInt(number);
+            presenter.calculate();
+        }else {
+            Toast.makeText(this, " Введите число", Toast.LENGTH_SHORT).show();
+        }
+        LOGGER.log("onSaveClick called // INPUT_NUMBER: " + INPUT_NUMBER );
 
     }
-
-//    @OnClick(R.id.button_calculate)
-//    void onSaveClick() {
-//        LOGGER.log("onSaveClick");
-//
-//        if (input.getText() != null){
-//            PresenterCollections.INPUT_NUMBER = parseInt(input.getText().toString());
-//            LOGGER.log("onSaveClick / PresenterCollections.INPUT_NUMBER " + PresenterCollections.INPUT_NUMBER);
-//            presenter.inputData();
-//            View view = this.getCurrentFocus();
-//            if (view != null) {
-//                InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-//                if (imm != null){
-//                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-//                }
-//        }
-//
-//
-//
-//        }
-//    }
 }

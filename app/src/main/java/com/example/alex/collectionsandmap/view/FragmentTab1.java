@@ -1,6 +1,5 @@
 package com.example.alex.collectionsandmap.view;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -14,12 +13,12 @@ import com.example.alex.collectionsandmap.adapter.CollectionsAdapter;
 import com.example.alex.collectionsandmap.model.CollectionsData;
 import com.example.alex.collectionsandmap.utils.Logger;
 
+public class FragmentTab1 extends Fragment{
 
-public class FragmentTab1 extends Fragment {
     private static Logger LOGGER = new Logger(FragmentTab1.class);
-
-    public static CollectionsAdapter adapter = new CollectionsAdapter(CollectionsData.list);
+    public static CollectionsAdapter adapter;
     CollectionsData collections = new CollectionsData();
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -27,11 +26,9 @@ public class FragmentTab1 extends Fragment {
                 (R.layout.fragment_tab1, container, false);
         LOGGER.log("onCreateView");
 
-        if (CollectionsData.list.size() == 0){
+        if (CollectionsData.list.size() == 0) {
             collections.addItemsInList();
         }
-
-
 
         adapter = new CollectionsAdapter(CollectionsData.list);
         collectionsRecycler.setAdapter(adapter);
@@ -40,7 +37,6 @@ public class FragmentTab1 extends Fragment {
 
         return collectionsRecycler;
     }
-
 }
 
 

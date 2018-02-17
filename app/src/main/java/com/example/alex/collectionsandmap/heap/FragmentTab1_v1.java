@@ -25,7 +25,7 @@
 //public class FragmentTab1_v1 extends Fragment {
 //    private static Logger LOGGER = new Logger(MainActivity.class);
 //
-//    MyData md = new MyData();
+//    CollectionsUtil md = new CollectionsUtil();
 //    ArrayList<Integer> al = new ArrayList<>();
 //    MyTask2 task;
 //
@@ -69,7 +69,7 @@
 //
 //        ProgressDialog pd;
 //
-//        MyData md = new MyData();
+//        CollectionsUtil md = new CollectionsUtil();
 //        ArrayList al = new ArrayList();
 //
 //

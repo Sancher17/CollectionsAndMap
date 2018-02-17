@@ -24,3 +24,5 @@
 -dontnote org.apache.commons.codec.**
 -dontnote org.apache.http.**
 -ignorewarnings
+-dontwarn java.lang.invoke.*
+-dontwarn **$$Lambda$*

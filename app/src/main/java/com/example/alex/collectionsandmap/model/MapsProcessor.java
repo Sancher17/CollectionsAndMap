@@ -1,16 +1,12 @@
 package com.example.alex.collectionsandmap.model;
 
 import com.example.alex.collectionsandmap.utils.Logger;
-
-import java.util.List;
 import java.util.Map;
-
 import static com.example.alex.collectionsandmap.view.MainActivity.INPUT_NUMBER;
 
+public class MapsProcessor {
 
-public class MapsUtil {
-
-    private static Logger LOGGER = new Logger(MapsUtil.class);
+    private static Logger LOGGER = new Logger(MapsProcessor.class);
 
     synchronized public static int add(Map map) {
         map.clear();
@@ -19,7 +15,7 @@ public class MapsUtil {
             map.put(i, "Map" + i);
         }
         int result = (int) (System.currentTimeMillis() - t1);
-        LOGGER.log("add // map size: " + map.size() + "// result " +result);
+        LOGGER.log("add // map size: " + map.size() + "// result " + result + getClassName(map));
         return result;
     }
 
@@ -30,11 +26,13 @@ public class MapsUtil {
         int value = INPUT_NUMBER / 2;
         map.get(value);
         int result = (int) (System.currentTimeMillis() - t1);
-        LOGGER.log("search // get value: " + value + "//map size " + map.size() + "// result " + result);
+        LOGGER.log("search // get value: " + value + "//map size " + map.size() + "// result " + result + getClassName(map));
         return result;
     }
 
     synchronized public static int remove(Map map) {
+        map.clear();
+        add(map);
         LOGGER.log("remove // map size: " + map.size());
         int size = map.size();
         long t1 = System.currentTimeMillis();
@@ -42,9 +40,12 @@ public class MapsUtil {
             map.remove(i);
         }
         int result = (int) (System.currentTimeMillis() - t1);
-        LOGGER.log("remove // map size: " + map.size()+"// result " + result);
+        LOGGER.log("remove // map size: " + map.size()+"// result " + result + getClassName(map));
         return result;
     }
 
+    private static String getClassName(Map map){
+        return " // " + map.getClass().getSimpleName();
+    }
 }
 

@@ -3,7 +3,7 @@ package com.example.alex.collectionsandmap.model;
 import java.util.List;
 import java.util.Map;
 
-public interface DataInterfaceCollections {
+public interface IMaps {
 
-    int start(List list);
+    int startMap(Map map);
 }

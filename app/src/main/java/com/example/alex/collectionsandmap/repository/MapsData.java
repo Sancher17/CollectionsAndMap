@@ -1,4 +1,4 @@
-package com.example.alex.collectionsandmap.model;
+package com.example.alex.collectionsandmap.repository;
 
 import com.example.alex.collectionsandmap.utils.Logger;
 
@@ -11,15 +11,15 @@ public class MapsData {
     private String name;
     private String action;
     private int resultOfCalculation = 0;
-    private int flag = 1;
+    private boolean progressBar = false;
 
     public MapsData() {
     }
 
-    public MapsData(String name, String action, int resultOfCalculation, int flag) {
+    public MapsData(String name, String action, int resultOfCalculation, boolean progressBar) {
         this.name = name;
         this.action = action;
-        this.flag = flag;
+        this.progressBar = progressBar;
         this.resultOfCalculation = resultOfCalculation;
     }
 
@@ -29,8 +29,8 @@ public class MapsData {
         LOGGER.log("addItemsInList called");
         String action = "add";
         for (int i = 1; i < 4; i++) {
-            list.add(new MapsData("TreeMap", action, resultOfCalculation, flag));
-            list.add(new MapsData("HashMap", action, resultOfCalculation, flag));
+            list.add(new MapsData("TreeMap", action, resultOfCalculation, progressBar));
+            list.add(new MapsData("HashMap", action, resultOfCalculation, progressBar));
             switch (i) {
                 case 1:
                     action = "search";
@@ -48,12 +48,12 @@ public class MapsData {
         return action;
     }
 
-    public int getFlag() {
-        return flag;
+    public boolean getProgressBar() {
+        return progressBar;
     }
 
-    public void setFlag(int flag) {
-        this.flag = flag;
+    public void setProgressBar(boolean progressBar) {
+        this.progressBar = progressBar;
     }
 
     public String getName() {

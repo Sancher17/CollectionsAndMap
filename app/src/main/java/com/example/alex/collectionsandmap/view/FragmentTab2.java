@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alex.collectionsandmap.R;
-import com.example.alex.collectionsandmap.adapter.MapsAdapter;
-import com.example.alex.collectionsandmap.model.MapsData;
+import com.example.alex.collectionsandmap.adapters.MapsAdapter;
+import com.example.alex.collectionsandmap.repository.MapsData;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 public class FragmentTab2 extends Fragment {

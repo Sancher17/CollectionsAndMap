@@ -13,8 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.alex.collectionsandmap.R;
-import com.example.alex.collectionsandmap.adapter.PagerAdapter;
-import com.example.alex.collectionsandmap.model.MapsUtil;
+import com.example.alex.collectionsandmap.adapters.PagerAdapter;
 import com.example.alex.collectionsandmap.presenter.Presenter;
 import com.example.alex.collectionsandmap.utils.Logger;
 
@@ -22,14 +21,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-
 public class MainActivity extends AppCompatActivity {
 
     private static Logger LOGGER = new Logger(MainActivity.class);
     private Presenter presenter = new Presenter();
     public static int GET_POSITION_TAB = 0;
     public static int INPUT_NUMBER;
-
+    public PagerAdapter adapter;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -46,9 +44,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.editText_input)
     EditText input;
 
-    PagerAdapter adapter;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         int cpu = Runtime.getRuntime().availableProcessors();
         LOGGER.log("CPU " + cpu);
 
-
         setSupportActionBar(toolbar);
 
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_1));
@@ -69,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
-
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

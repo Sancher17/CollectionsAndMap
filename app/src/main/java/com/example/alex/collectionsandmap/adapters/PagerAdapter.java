@@ -1,4 +1,4 @@
-package com.example.alex.collectionsandmap.adapter;
+package com.example.alex.collectionsandmap.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +10,7 @@ import com.example.alex.collectionsandmap.view.FragmentTab2;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
-    int numOfTabs;
+    private int numOfTabs;
 
     public PagerAdapter(FragmentManager fm, int numOfTabs) {
         super(fm);
@@ -22,11 +22,9 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                FragmentTab1 tab1 = new FragmentTab1();
-                return tab1;
+                return new FragmentTab1();
             case 1:
-                FragmentTab2 tab2 = new FragmentTab2();
-                return tab2;
+                return new FragmentTab2();
             default:
                 return null;
         }

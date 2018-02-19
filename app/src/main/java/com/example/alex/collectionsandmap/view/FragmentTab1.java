@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alex.collectionsandmap.R;
-import com.example.alex.collectionsandmap.adapter.CollectionsAdapter;
-import com.example.alex.collectionsandmap.model.CollectionsData;
+import com.example.alex.collectionsandmap.adapters.CollectionsAdapter;
+import com.example.alex.collectionsandmap.repository.CollectionsData;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 public class FragmentTab1 extends Fragment{

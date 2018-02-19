@@ -1,17 +1,18 @@
 package com.example.alex.collectionsandmap.presenter;
 
-import com.example.alex.collectionsandmap.BackgroundWork.ExecutorService.ExecutorTaskCollection;
-import com.example.alex.collectionsandmap.BackgroundWork.ExecutorService.ExecutorTaskMap;
+import com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService.ExecutorCollection;
+import com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService.ExecutorMap;
 import com.example.alex.collectionsandmap.utils.Logger;
+
+import java.security.PublicKey;
 
 import static com.example.alex.collectionsandmap.view.MainActivity.GET_POSITION_TAB;
 
 public class Presenter {
 
     private static Logger LOGGER = new Logger(Presenter.class);
-    private ExecutorTaskCollection collection = new ExecutorTaskCollection();
-    private ExecutorTaskMap map = new ExecutorTaskMap();
-
+    private ExecutorCollection collection = new ExecutorCollection();
+    private ExecutorMap map = new ExecutorMap();
 
     public void calculate() {
         LOGGER.log("calculate called");
@@ -22,15 +23,16 @@ public class Presenter {
             map.doTask();
         }
     }
+
 }
 
 
 /**heap*/
-//        LOGGER.log("flag " + CollectionsData.list.get(0).getFlag());
-//        CollectionsData.list.get(0).setFlag(0);
-//        CollectionsData.list.get(1).setFlag(0);
-//        CollectionsData.list.get(2).setFlag(0);
-//        LOGGER.log("flag " + CollectionsData.list.get(0).getFlag());
+//        LOGGER.log("flag " + CollectionsData.list.get(0).getProgressBar());
+//        CollectionsData.list.get(0).setProgressBar(0);
+//        CollectionsData.list.get(1).setProgressBar(0);
+//        CollectionsData.list.get(2).setProgressBar(0);
+//        LOGGER.log("flag " + CollectionsData.list.get(0).getProgressBar());
 //        FragmentTab1.adapter.notifyDataSetChanged();
 
         /** решение с AsyncTysk все работатет start*/
@@ -38,7 +40,7 @@ public class Presenter {
 //        myTask.execute();
         /**end*/
 
-//        CollectionsData.list.get(0).setFlag(0);
+//        CollectionsData.list.get(0).setProgressBar(0);
         /**пробую ExecutorService 12.02. start*/
 //        ExecutorService executor = Executors.newSingleThreadExecutor();
 
@@ -78,7 +80,7 @@ public class Presenter {
 //        } catch (ExecutionException e) {
 //            e.printStackTrace();
 //        }
-//        CollectionsData.list.get(0).setFlag(1);
+//        CollectionsData.list.get(0).setProgressBar(1);
 //        FragmentTab1.adapter.notifyDataSetChanged();
 
 //        executor.execute(new Runnable() {

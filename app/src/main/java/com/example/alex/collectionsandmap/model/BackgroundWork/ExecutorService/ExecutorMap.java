@@ -3,29 +3,26 @@ package com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService;
 
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.alex.collectionsandmap.model.IMaps;
 import com.example.alex.collectionsandmap.repository.MapsData;
-import com.example.alex.collectionsandmap.model.MapsProcessor;
 import com.example.alex.collectionsandmap.utils.Logger;
 import com.example.alex.collectionsandmap.view.FragmentTab2;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class ExecutorMap extends AppCompatActivity {
 
     private static Logger LOGGER = new Logger(ExecutorCollection.class);
-    private TreeMap treeMap = new TreeMap();
-    private HashMap hashMap = new HashMap();
-
     private int core = Runtime.getRuntime().availableProcessors();
-
     private ExecutorService executor = Executors.newFixedThreadPool(core+1);
 
-    void runBackground(final int position, final Map map, IMaps func) {
+    interface CompleteCallback {
+        void onComplete();
+    }
+
+
+    public void runBackground(final int position, final Map map, IMaps func) {
         LOGGER.log("runBackground called // position " + position);
         MapsData.list.get(position).setProgressBar(true);
         MapsData.list.get(position).setResultOfCalculation(0);
@@ -47,22 +44,6 @@ public class ExecutorMap extends AppCompatActivity {
                 });
             }
         });
-    }
-
-    public void doTask() {
-        LOGGER.log("doTask called");
-        LOGGER.log("quantity of CPU " + core);
-        runBackground(0, treeMap, MapsProcessor::add);
-        runBackground(1, hashMap, MapsProcessor::add);
-
-        runBackground(2, treeMap, MapsProcessor::search);
-        runBackground(3, hashMap, MapsProcessor::search);
-
-        runBackground(4, treeMap, MapsProcessor::remove);
-        runBackground(5, hashMap, MapsProcessor::remove);
-
-
-
     }
 }
 

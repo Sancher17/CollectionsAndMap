@@ -1,16 +1,17 @@
 package com.example.alex.collectionsandmap.model;
 
+import com.example.alex.collectionsandmap.presenter.ICollectionsPresenter;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 import java.util.List;
 
 import static com.example.alex.collectionsandmap.view.MainActivity.INPUT_NUMBER;
 
-public class CollectionsProcessor {
+public class CollectionsProcessor implements ICollectionsProcessor {
 
     private static Logger LOGGER = new Logger(CollectionsProcessor.class);
 
-    synchronized public static int addToStart(List<Integer> list) {
+    public int addToStart(List<Integer> list) {
         list.clear();
         long t1 = System.currentTimeMillis();
         for (int i = 0; i < INPUT_NUMBER; i++) {
@@ -21,7 +22,7 @@ public class CollectionsProcessor {
         return result;
     }
 
-    synchronized public static int addToMiddle(List<Integer> list) {
+    public int addToMiddle(List<Integer> list) {
         list.clear();
         long t1 = System.currentTimeMillis();
         for (int i = 0; i < INPUT_NUMBER; i++) {
@@ -32,7 +33,7 @@ public class CollectionsProcessor {
         return result;
     }
 
-    synchronized public static int addToEnd(List<Integer> list) {
+    public  int addToEnd(List<Integer> list) {
         list.clear();
         long t1 = System.currentTimeMillis();
         for (int i = 0; i < INPUT_NUMBER; i++) {
@@ -43,7 +44,7 @@ public class CollectionsProcessor {
         return result;
     }
 
-    synchronized public static int search(List<Integer> list) {
+    public  int search(List<Integer> list) {
         list.clear();
         addToEnd(list);
         long t1 = System.currentTimeMillis();
@@ -54,9 +55,9 @@ public class CollectionsProcessor {
         return result;
     }
 
-    synchronized public static int removeStart(List<Integer> list) {
-         list.clear();
-         addToEnd(list);
+    public  int removeStart(List<Integer> list) {
+        list.clear();
+        addToEnd(list);
         LOGGER.log("remove start called - 1 // size " + list.size() + getClassName(list));
         int size = list.size();
         long t1 = System.currentTimeMillis();
@@ -68,9 +69,9 @@ public class CollectionsProcessor {
         return result;
     }
 
-    synchronized public static int removeMiddle(List<Integer> list) {
-         list.clear();
-         addToEnd(list);
+    public  int removeMiddle(List<Integer> list) {
+        list.clear();
+        addToEnd(list);
         LOGGER.log("remove middle called - 1 // size " + list.size() + getClassName(list));
         int size = list.size();
         long t1 = System.currentTimeMillis();
@@ -83,7 +84,7 @@ public class CollectionsProcessor {
         return result;
     }
 
-    synchronized public static int removeEnd(List<Integer> list) {
+    public  int removeEnd(List<Integer> list) {
         list.clear();
         addToEnd(list);
         LOGGER.log("remove end called - 1 // size " + list.size() + getClassName(list));

@@ -1,33 +1,41 @@
 package com.example.alex.collectionsandmap.presenter;
 
-import com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService.ExecutorCollection;
-import com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService.ExecutorMap;
 import com.example.alex.collectionsandmap.utils.Logger;
-
-import java.security.PublicKey;
+import com.example.alex.collectionsandmap.view.IView;
 
 import static com.example.alex.collectionsandmap.view.MainActivity.GET_POSITION_TAB;
 
-public class Presenter {
+public class BasePresenter implements IBasePresenter {
 
-    private static Logger LOGGER = new Logger(Presenter.class);
-    private ExecutorCollection collection = new ExecutorCollection();
-    private ExecutorMap map = new ExecutorMap();
+    private IView iView;
+    private IMapsPresenter iMapsPresenter;
+    private ICollectionsPresenter iCollectionsPresenter;
+
+    private static Logger LOGGER = new Logger(BasePresenter.class);
+
+    public BasePresenter(IView iView){
+        this.iView = iView;
+    }
+
 
     public void calculate() {
         LOGGER.log("calculate called");
 
-        if (GET_POSITION_TAB == 0){
-            collection.doTask();
-        }else {
-            map.doTask();
+        if (GET_POSITION_TAB == 0) {
+            iCollectionsPresenter = new CollectionsPresenter();
+            iCollectionsPresenter.doTask();
+        } else {
+            iMapsPresenter = new MapsPresenter();
+            iMapsPresenter.doTask();
         }
     }
 
 }
 
 
-/**heap*/
+/**
+ * heap решение с AsyncTysk все работатет startendпробую ExecutorService 12.02. startRunnable без возврата результатаCallable с возвратом результатаendРешение с Callback
+ */
 //        LOGGER.log("flag " + CollectionsData.list.get(0).getProgressBar());
 //        CollectionsData.list.get(0).setProgressBar(0);
 //        CollectionsData.list.get(1).setProgressBar(0);
@@ -35,16 +43,16 @@ public class Presenter {
 //        LOGGER.log("flag " + CollectionsData.list.get(0).getProgressBar());
 //        FragmentTab1.adapter.notifyDataSetChanged();
 
-        /** решение с AsyncTysk все работатет start*/
+/** решение с AsyncTysk все работатет start*/
 //        myTask = new MyAsyncTask();
 //        myTask.execute();
-        /**end*/
+/**end*/
 
 //        CollectionsData.list.get(0).setProgressBar(0);
-        /**пробую ExecutorService 12.02. start*/
+/**пробую ExecutorService 12.02. start*/
 //        ExecutorService executor = Executors.newSingleThreadExecutor();
 
-        /**Runnable без возврата результата*/
+/**Runnable без возврата результата*/
 //        Future<?> future = executor.submit(new Runnable() {
 //            @Override
 //            public void run() {
@@ -63,7 +71,7 @@ public class Presenter {
 //            e.printStackTrace();
 //        }
 
-        /**Callable с возвратом результата*/
+/**Callable с возвратом результата*/
 //        Future<Object> future = executor.submit(new Callable<Object>() {
 //            @Override
 //            public Object call() throws Exception {
@@ -91,7 +99,7 @@ public class Presenter {
 //        });
 
 //        FragmentTab1.adapter.notifyDataSetChanged();
-        /**end*/
+/**end*/
 //        /*****************************/
 //        Runnable runnable = new Runnable() {
 //            @Override
@@ -123,9 +131,9 @@ public class Presenter {
 //        };
 //
 
-        /****************************/
+/****************************/
 
-        /**Решение с Callback*/
+/**Решение с Callback*/
 //        LOGGER.log("BEFORE registerCallback() ");
 //        collection.registerCallback(ft1);
 //        LOGGER.log("BEFORE doTask() ");

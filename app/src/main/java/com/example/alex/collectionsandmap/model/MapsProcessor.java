@@ -4,11 +4,11 @@ import com.example.alex.collectionsandmap.utils.Logger;
 import java.util.Map;
 import static com.example.alex.collectionsandmap.view.MainActivity.INPUT_NUMBER;
 
-public class MapsProcessor {
+public class MapsProcessor implements IMapProcessor{
 
     private static Logger LOGGER = new Logger(MapsProcessor.class);
 
-    synchronized public static int add(Map map) {
+    public int add(Map map) {
         map.clear();
         long t1 = System.currentTimeMillis();
         for (int i = 0; i < INPUT_NUMBER; i++) {
@@ -19,7 +19,7 @@ public class MapsProcessor {
         return result;
     }
 
-    synchronized public static int search(Map map) {
+    public int search(Map map) {
         map.clear();
         add(map);
         long t1 = System.currentTimeMillis();
@@ -30,7 +30,7 @@ public class MapsProcessor {
         return result;
     }
 
-    synchronized public static int remove(Map map) {
+    public int remove(Map map) {
         map.clear();
         add(map);
         LOGGER.log("remove // map size: " + map.size());

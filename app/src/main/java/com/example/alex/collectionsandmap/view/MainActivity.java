@@ -14,20 +14,23 @@ import android.widget.Toast;
 
 import com.example.alex.collectionsandmap.R;
 import com.example.alex.collectionsandmap.adapters.PagerAdapter;
-import com.example.alex.collectionsandmap.presenter.Presenter;
+import com.example.alex.collectionsandmap.presenter.IBasePresenter;
+import com.example.alex.collectionsandmap.presenter.BasePresenter;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IView {
 
     private static Logger LOGGER = new Logger(MainActivity.class);
-    private Presenter presenter = new Presenter();
+//    private BasePresenter presenter = new BasePresenter();
     public static int GET_POSITION_TAB = 0;
     public static int INPUT_NUMBER;
     public PagerAdapter adapter;
+
+    IBasePresenter iPresenter;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -49,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        if(iPresenter == null){
+            iPresenter = new BasePresenter(this);
+        }
 
         LOGGER.log("MainActivity started");
         int cpu = Runtime.getRuntime().availableProcessors();
@@ -88,8 +95,28 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+//    @OnClick(R.id.button_calculate)
+//    void onSaveClick() {
+//        View view = this.getCurrentFocus();
+//        if (view != null) {
+//            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+//            if (imm != null) {
+//                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+//            }
+//        }
+//        String number = input.getText().toString();
+//        if (number.length() > 0 ) {
+//            INPUT_NUMBER = Integer.parseInt(number);
+//            iPresenter.calculate();
+//        }else {
+//            Toast.makeText(this, " Введите число", Toast.LENGTH_SHORT).show();
+//        }
+//        LOGGER.log("onSaveClick called // INPUT_NUMBER: " + INPUT_NUMBER );
+//
+//    }
+
     @OnClick(R.id.button_calculate)
-    void onSaveClick() {
+    public void onGetButtonClick() {
         View view = this.getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -97,14 +124,20 @@ public class MainActivity extends AppCompatActivity {
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
         }
+
         String number = input.getText().toString();
         if (number.length() > 0 ) {
             INPUT_NUMBER = Integer.parseInt(number);
-            presenter.calculate();
+            iPresenter.calculate();
         }else {
             Toast.makeText(this, " Введите число", Toast.LENGTH_SHORT).show();
         }
         LOGGER.log("onSaveClick called // INPUT_NUMBER: " + INPUT_NUMBER );
+
+    }
+
+    @Override
+    public void showError() {
 
     }
 }

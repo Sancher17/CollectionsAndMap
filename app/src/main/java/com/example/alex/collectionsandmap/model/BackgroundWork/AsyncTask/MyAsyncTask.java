@@ -23,7 +23,7 @@ public class MyAsyncTask extends AsyncTask <Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         LOGGER.log("doInBackground called");
-        CollectionsData.list.get(0).setResultOfCalculation(CollectionsProcessor.addToStart(al));
+//        CollectionsData.list.get(0).setResultOfCalculation(CollectionsProcessor.addToStart(al));
         return null;
     }
 

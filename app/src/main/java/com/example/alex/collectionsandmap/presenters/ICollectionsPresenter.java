@@ -1,4 +1,4 @@
-package com.example.alex.collectionsandmap.presenter;
+package com.example.alex.collectionsandmap.presenters;
 
 
 public interface ICollectionsPresenter {

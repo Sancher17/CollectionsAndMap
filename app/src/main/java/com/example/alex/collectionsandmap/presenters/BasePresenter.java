@@ -1,4 +1,4 @@
-package com.example.alex.collectionsandmap.presenter;
+package com.example.alex.collectionsandmap.presenters;
 
 import com.example.alex.collectionsandmap.utils.Logger;
 import com.example.alex.collectionsandmap.view.IView;

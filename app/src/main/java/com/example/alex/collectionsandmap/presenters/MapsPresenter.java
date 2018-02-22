@@ -1,4 +1,4 @@
-package com.example.alex.collectionsandmap.presenter;
+package com.example.alex.collectionsandmap.presenters;
 
 import com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService.ExecutorMap;
 import com.example.alex.collectionsandmap.model.IMapProcessor;

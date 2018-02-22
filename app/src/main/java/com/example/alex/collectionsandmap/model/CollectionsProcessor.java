@@ -1,6 +1,5 @@
 package com.example.alex.collectionsandmap.model;
 
-import com.example.alex.collectionsandmap.presenter.ICollectionsPresenter;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 import java.util.List;

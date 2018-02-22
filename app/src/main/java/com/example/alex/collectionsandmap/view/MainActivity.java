@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import com.example.alex.collectionsandmap.R;
 import com.example.alex.collectionsandmap.adapters.PagerAdapter;
-import com.example.alex.collectionsandmap.presenter.IBasePresenter;
-import com.example.alex.collectionsandmap.presenter.BasePresenter;
+import com.example.alex.collectionsandmap.presenters.IBasePresenter;
+import com.example.alex.collectionsandmap.presenters.BasePresenter;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 import butterknife.BindView;
@@ -95,31 +95,12 @@ public class MainActivity extends AppCompatActivity implements IView {
         });
     }
 
-//    @OnClick(R.id.button_calculate)
-//    void onSaveClick() {
-//        View view = this.getCurrentFocus();
-//        if (view != null) {
-//            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-//            if (imm != null) {
-//                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-//            }
-//        }
-//        String number = input.getText().toString();
-//        if (number.length() > 0 ) {
-//            INPUT_NUMBER = Integer.parseInt(number);
-//            iPresenter.calculate();
-//        }else {
-//            Toast.makeText(this, " Введите число", Toast.LENGTH_SHORT).show();
-//        }
-//        LOGGER.log("onSaveClick called // INPUT_NUMBER: " + INPUT_NUMBER );
-//
-//    }
-
     @OnClick(R.id.button_calculate)
     public void onGetButtonClick() {
         View view = this.getCurrentFocus();
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager)
+                    getSystemService(Context.INPUT_METHOD_SERVICE);
             if (imm != null) {
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }

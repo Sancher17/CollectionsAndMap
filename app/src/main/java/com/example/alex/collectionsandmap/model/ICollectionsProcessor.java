@@ -1,6 +1,5 @@
 package com.example.alex.collectionsandmap.model;
 
-
 import java.util.List;
 
 public interface ICollectionsProcessor {
@@ -18,10 +17,4 @@ public interface ICollectionsProcessor {
     int removeMiddle(List<Integer> list);
 
     int removeEnd(List<Integer> list);
-
-
-
-
-
-
 }

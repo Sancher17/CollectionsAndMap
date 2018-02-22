@@ -2,8 +2,8 @@ package com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService;
 
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.alex.collectionsandmap.presenter.CollectionsPresenter;
-import com.example.alex.collectionsandmap.presenter.ICollectionsPresenter;
+import com.example.alex.collectionsandmap.presenters.CollectionsPresenter;
+import com.example.alex.collectionsandmap.presenters.ICollectionsPresenter;
 import com.example.alex.collectionsandmap.repository.CollectionsData;
 import com.example.alex.collectionsandmap.utils.Logger;
 

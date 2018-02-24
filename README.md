@@ -1,6 +1,6 @@
-# Android-MVP-example
+# Collections and Maps
 
-Project contains good example of android application architecture.
+Project contains ============
 
 ### Liblaries
 
@@ -8,9 +8,13 @@ Project contains good example of android application architecture.
 
 [Retrolambda](https://github.com/evant/gradle-retrolambda) for Java 8 support.
 
+## User Stores
+![Screenshot](userstory.png)
+
+
 ## Author
 
-* **Aleksandr Kovalenko* - [Facebook](https://www.facebook.com/aliaksandr.kavalenka.7)
+* *Aleksandr Kovalenko* - [Facebook](https://www.facebook.com/aliaksandr.kavalenka.7)
 
 ## License
 

@@ -1,6 +1,21 @@
 # Collections and Maps
 
-Project contains ============
+Приложение вычисляет время выполнения операций для Collections и Maps
+
+Для collections (ArrayList, LinkedList, CopyOnWriteArrayList):
+1.	Добавить items в начало
+2.	Добавить items в середину
+3.	Добавить items в конец
+4.	Найти item
+5.	Удалить все items с начала
+6.	Удалить все items с середины
+7.	Удалить все items с конца
+
+Для maps (TreeMap, HashMap):
+1.	Добавить items
+2.	Найти item
+3.	Удалить все items
+ 
 
 ### Liblaries
 

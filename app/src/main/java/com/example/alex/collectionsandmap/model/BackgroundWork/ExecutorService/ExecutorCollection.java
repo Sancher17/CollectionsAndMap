@@ -7,6 +7,9 @@ import com.example.alex.collectionsandmap.presenters.ICollectionsPresenter;
 import com.example.alex.collectionsandmap.repository.CollectionsData;
 import com.example.alex.collectionsandmap.utils.Logger;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -43,4 +46,5 @@ public class ExecutorCollection extends AppCompatActivity {
             }
         });
     }
+
 }

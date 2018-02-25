@@ -4,11 +4,11 @@ import java.util.Map;
 
 public interface IMapProcessor {
 
-    int add(Map map);
+    int add(Map<Integer, String> map);
 
-    int search(Map map);
+    int search(Map<Integer, String> map);
 
-    int remove(Map map);
+    int remove(Map<Integer, String> map);
 }
 
 

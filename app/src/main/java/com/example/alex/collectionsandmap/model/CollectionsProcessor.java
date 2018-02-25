@@ -48,8 +48,13 @@ public class CollectionsProcessor implements ICollectionsProcessor {
         addToEnd(list);
         long t1 = System.currentTimeMillis();
         int value = INPUT_NUMBER / 2;
-        list.get(value);
-        int result = (int) (System.currentTimeMillis() - t1);
+        int result = -1;
+        for (Integer items: list) {
+            if (items.equals(value)){
+                result = (int) (System.currentTimeMillis() - t1);
+                break;
+            }
+        }
         LOGGER.log("search called // size " + list.size() + " value " + value + "result " + result + getClassName(list));
         return result;
     }

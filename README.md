@@ -27,6 +27,10 @@
 ![Screenshot](userstory.png)
 
 
+## Complexity analysis
+
+![Screenshot](complexity.png)
+
 ## Author
 
 * *Aleksandr Kovalenko* - [Facebook](https://www.facebook.com/aliaksandr.kavalenka.7)

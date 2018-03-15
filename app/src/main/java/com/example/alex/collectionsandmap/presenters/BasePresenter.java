@@ -32,10 +32,12 @@ public class BasePresenter implements IBasePresenter {
 
 }
 
+/*
 
-/**
- * heap решение с AsyncTysk все работатет startendпробую ExecutorService 12.02. startRunnable без возврата результатаCallable с возвратом результатаendРешение с Callback
- */
+*
+ * heap решение с AsyncTysk все работатет пробую ExecutorService 12.02. startRunnable без возврата результатаCallable с возвратом результатаendРешение с Callback
+
+
 //        LOGGER.log("flag " + CollectionsData.list.get(0).getProgressBar());
 //        CollectionsData.list.get(0).setProgressBar(0);
 //        CollectionsData.list.get(1).setProgressBar(0);
@@ -43,16 +45,20 @@ public class BasePresenter implements IBasePresenter {
 //        LOGGER.log("flag " + CollectionsData.list.get(0).getProgressBar());
 //        FragmentTab1.adapter.notifyDataSetChanged();
 
-/** решение с AsyncTysk все работатет start*/
+* решение с AsyncTysk все работатет start
+
 //        myTask = new MyAsyncTask();
 //        myTask.execute();
-/**end*/
+*end
+
 
 //        CollectionsData.list.get(0).setProgressBar(0);
-/**пробую ExecutorService 12.02. start*/
+*пробую ExecutorService 12.02. start
+
 //        ExecutorService executor = Executors.newSingleThreadExecutor();
 
-/**Runnable без возврата результата*/
+*Runnable без возврата результата
+
 //        Future<?> future = executor.submit(new Runnable() {
 //            @Override
 //            public void run() {
@@ -71,7 +77,8 @@ public class BasePresenter implements IBasePresenter {
 //            e.printStackTrace();
 //        }
 
-/**Callable с возвратом результата*/
+*Callable с возвратом результата
+
 //        Future<Object> future = executor.submit(new Callable<Object>() {
 //            @Override
 //            public Object call() throws Exception {
@@ -99,8 +106,11 @@ public class BasePresenter implements IBasePresenter {
 //        });
 
 //        FragmentTab1.adapter.notifyDataSetChanged();
-/**end*/
-//        /*****************************/
+*end
+
+//
+***************************
+
 //        Runnable runnable = new Runnable() {
 //            @Override
 //            public void run() {
@@ -131,15 +141,20 @@ public class BasePresenter implements IBasePresenter {
 //        };
 //
 
-/****************************/
+**************************
 
-/**Решение с Callback*/
+
+*Решение с Callback
+
 //        LOGGER.log("BEFORE registerCallback() ");
 //        collection.registerCallback(ft1);
 //        LOGGER.log("BEFORE doTask() ");
 //        collection.doTask();
-//        /**end*/
+//
+*end
+
 
 //
 //    }
 //}
+*/

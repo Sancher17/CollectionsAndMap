@@ -22,7 +22,7 @@ public class ExecutorMap extends AppCompatActivity {
     }
 
 
-    public void runBackground(final int position, final Map map, IMaps func) {
+    public void runBackground(final int position, Map map, IMaps func) {
         LOGGER.log("runBackground called // position " + position);
         MapsData.list.get(position).setProgressBar(true);
         MapsData.list.get(position).setResultOfCalculation(0);
@@ -34,13 +34,10 @@ public class ExecutorMap extends AppCompatActivity {
                 LOGGER.log("Thread // " + executor.toString()+ " // "+ Thread.currentThread().getName());
                 int result = func.startMap(map);
                 MapsData.list.get(position).setResultOfCalculation(result);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        LOGGER.log("runOnUiThread // position " + position + " // result " + result);
-                        MapsData.list.get(position).setProgressBar(false);
-                        FragmentTab2.adapter.notifyItemChanged(position);
-                    }
+                runOnUiThread(() -> {
+                    LOGGER.log("runOnUiThread // position " + position + " // result " + result);
+                    MapsData.list.get(position).setProgressBar(false);
+                    FragmentTab2.adapter.notifyItemChanged(position);
                 });
             }
         });

@@ -17,7 +17,6 @@ public class BasePresenter implements IBasePresenter {
         this.iView = iView;
     }
 
-
     public void calculate() {
         LOGGER.log("calculate called");
 

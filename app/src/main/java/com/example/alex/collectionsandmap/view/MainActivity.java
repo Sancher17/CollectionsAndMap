@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements IView {
 //    private BasePresenter presenter = new BasePresenter();
     public static int GET_POSITION_TAB = 0;
     public static int INPUT_NUMBER;
+
     public PagerAdapter adapter;
 
     IBasePresenter iPresenter;

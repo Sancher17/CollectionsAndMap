@@ -1,4 +1,4 @@
-package com.example.alex.collectionsandmap.repository;
+package com.example.alex.collectionsandmap.model.repository;
 
 import com.example.alex.collectionsandmap.utils.Logger;
 

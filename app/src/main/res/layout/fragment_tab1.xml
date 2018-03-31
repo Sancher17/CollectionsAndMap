@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:id="@+id/tab1_recycler"
     android:scrollbars="vertical"
-    tools:context="com.example.alex.collectionsandmap.view.MainActivity">
+    tools:context="com.example.alex.collectionsandmap.MainActivity">
 
 </android.support.v7.widget.RecyclerView>
 

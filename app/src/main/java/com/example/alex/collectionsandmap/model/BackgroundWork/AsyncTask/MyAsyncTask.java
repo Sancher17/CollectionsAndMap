@@ -2,8 +2,6 @@ package com.example.alex.collectionsandmap.model.BackgroundWork.AsyncTask;
 
 import android.os.AsyncTask;
 
-import com.example.alex.collectionsandmap.model.CollectionsProcessor;
-import com.example.alex.collectionsandmap.repository.CollectionsData;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 import java.util.ArrayList;

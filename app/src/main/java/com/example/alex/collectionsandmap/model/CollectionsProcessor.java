@@ -2,10 +2,9 @@ package com.example.alex.collectionsandmap.model;
 
 import com.example.alex.collectionsandmap.utils.Logger;
 
-import java.util.LinkedList;
 import java.util.List;
 
-import static com.example.alex.collectionsandmap.view.MainActivity.INPUT_NUMBER;
+import static com.example.alex.collectionsandmap.MainActivity.INPUT_NUMBER;
 
 public class CollectionsProcessor implements ICollectionsProcessor {
 

@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: "com.jaredsburrows.spoon"
-apply plugin: 'me.tatarka.retrolambda'
 
 //def paranoid = "on"
 def paranoid = "off"

@@ -8,7 +8,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.alex.collectionsandmap.R;
-import com.example.alex.collectionsandmap.repository.MapsData;
+import com.example.alex.collectionsandmap.model.repository.MapsData;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 import java.util.List;

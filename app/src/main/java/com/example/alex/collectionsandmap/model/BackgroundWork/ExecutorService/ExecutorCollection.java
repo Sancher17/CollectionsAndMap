@@ -2,14 +2,10 @@ package com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService;
 
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.alex.collectionsandmap.presenters.CollectionsPresenter;
-import com.example.alex.collectionsandmap.presenters.ICollectionsPresenter;
-import com.example.alex.collectionsandmap.repository.CollectionsData;
+import com.example.alex.collectionsandmap.collections.CollectionsPresenter;
+import com.example.alex.collectionsandmap.dataCollections.CollectionsData;
 import com.example.alex.collectionsandmap.utils.Logger;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -20,27 +16,34 @@ public class ExecutorCollection extends AppCompatActivity {
     private int core = Runtime.getRuntime().availableProcessors();
     private ExecutorService executor = Executors.newFixedThreadPool(core+1);
 
-    ICollectionsPresenter iCollectionsPresenter;
+
+//    ICollectionsPresenter iCollectionsPresenter;
 
     public void runBackground(final int position, List list, ICollections func){
         LOGGER.log("runBackground called // position " + position);
-        iCollectionsPresenter = new CollectionsPresenter();
+//        iCollectionsPresenter = new CollectionsPresenter();
         CollectionsData.list.get(position).setProgressBar(true);
         CollectionsData.list.get(position).setResultOfCalculation(0);
-        iCollectionsPresenter.updateAdapterItem(position);
+//        iCollectionsPresenter.updateAdapterItem(position);
+        // TODO: 30.03.2018 обновить итем через презентер
+//        presenter.updateAdapterItem(position);
         executor.submit(new Runnable() {
             @Override
             public void run() {
                 LOGGER.log("run called");
                 LOGGER.log("Thread // "+ executor.toString());
                 int result = func.start(list);
+
+
                 CollectionsData.list.get(position).setResultOfCalculation(result);
+
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         LOGGER.log("runOnUiThread // position " + position + " // result " + result);
                         CollectionsData.list.get(position).setProgressBar(false);
-                        iCollectionsPresenter.updateAdapterItem(position);
+//                        iCollectionsPresenter.updateAdapterItem(position);
                     }
                 });
             }

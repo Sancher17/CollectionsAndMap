@@ -4,8 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.example.alex.collectionsandmap.view.FragmentTab1;
-import com.example.alex.collectionsandmap.view.FragmentTab2;
+import com.example.alex.collectionsandmap.collections.CollectionsFragment;
+import com.example.alex.collectionsandmap.maps.MapsFragmentTab;
 
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
@@ -22,9 +22,9 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                return new FragmentTab1();
+                return new CollectionsFragment();
             case 1:
-                return new FragmentTab2();
+                return new MapsFragmentTab();
             default:
                 return null;
         }

@@ -1,33 +1,33 @@
 package com.example.alex.collectionsandmap.presenters;
 
+import com.example.alex.collectionsandmap.collections.CollectionsPresenter;
 import com.example.alex.collectionsandmap.utils.Logger;
-import com.example.alex.collectionsandmap.view.IView;
 
-import static com.example.alex.collectionsandmap.view.MainActivity.GET_POSITION_TAB;
+import static com.example.alex.collectionsandmap.MainActivity.GET_POSITION_TAB;
 
-public class BasePresenter implements IBasePresenter {
+public class BasePresenter {
 
-    private IView iView;
-    private IMapsPresenter iMapsPresenter;
-    private ICollectionsPresenter iCollectionsPresenter;
-
-    private static Logger LOGGER = new Logger(BasePresenter.class);
-
-    public BasePresenter(IView iView){
-        this.iView = iView;
-    }
-
-    public void calculate() {
-        LOGGER.log("calculate called");
-
-        if (GET_POSITION_TAB == 0) {
-            iCollectionsPresenter = new CollectionsPresenter();
-            iCollectionsPresenter.doTask();
-        } else {
-            iMapsPresenter = new MapsPresenter();
-            iMapsPresenter.doTask();
-        }
-    }
+//    private IView iView;
+//    private IMapsPresenter iMapsPresenter;
+//    private ICollectionsPresenter iCollectionsPresenter;
+//
+//    Logger LOGGER = new Logger(this.getClass());
+//
+//    public BasePresenter(IView iView){
+//        this.iView = iView;
+//    }
+//
+//    public void calculate() {
+//        LOGGER.log("calculate called");
+//
+//        if (GET_POSITION_TAB == 0) {
+//            iCollectionsPresenter = new CollectionsPresenter();
+//            iCollectionsPresenter.doTask();
+//        } else {
+//            iMapsPresenter = new MapsPresenter();
+//            iMapsPresenter.doTask();
+//        }
+//    }
 
 }
 
@@ -42,7 +42,7 @@ public class BasePresenter implements IBasePresenter {
 //        CollectionsData.list.get(1).setProgressBar(0);
 //        CollectionsData.list.get(2).setProgressBar(0);
 //        LOGGER.log("flag " + CollectionsData.list.get(0).getProgressBar());
-//        FragmentTab1.adapter.notifyDataSetChanged();
+//        CollectionsFragment.adapter.notifyDataSetChanged();
 
 * решение с AsyncTysk все работатет start
 
@@ -95,7 +95,7 @@ public class BasePresenter implements IBasePresenter {
 //            e.printStackTrace();
 //        }
 //        CollectionsData.list.get(0).setProgressBar(1);
-//        FragmentTab1.adapter.notifyDataSetChanged();
+//        CollectionsFragment.adapter.notifyDataSetChanged();
 
 //        executor.execute(new Runnable() {
 //            @Override
@@ -104,7 +104,7 @@ public class BasePresenter implements IBasePresenter {
 //            }
 //        });
 
-//        FragmentTab1.adapter.notifyDataSetChanged();
+//        CollectionsFragment.adapter.notifyDataSetChanged();
 *end
 
 //

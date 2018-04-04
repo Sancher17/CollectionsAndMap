@@ -14,8 +14,6 @@ public interface CollectionsContract {
 
     interface Presenter extends BasePresenter{
 
-        void doTask();
-
         void updateAdapterItem(int position);
 
         public void createData();

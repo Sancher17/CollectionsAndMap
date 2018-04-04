@@ -100,13 +100,13 @@ public class MainActivity extends AppCompatActivity {
         if (number.length() > 0 ) {
             INPUT_NUMBER = Integer.parseInt(number);
             // TODO: 30.03.2018 - переадать клик во фрагмент
-//            iPresenter.calculate();
+//            iPresenter.runCalculate();
             CollectionsFragment cf = new CollectionsFragment();
             cf.onStartCalculation();
         }else {
             Toast.makeText(this, " Введите число", Toast.LENGTH_SHORT).show();
         }
-        LOGGER.log("onSaveClick called // INPUT_NUMBER: " + INPUT_NUMBER );
-
     }
+
+
 }

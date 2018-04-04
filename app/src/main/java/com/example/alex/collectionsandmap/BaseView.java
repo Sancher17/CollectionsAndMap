@@ -13,4 +13,10 @@ public interface BaseView <T>{
 
     void updateAdapter();
 
+    void updateItemAdapter(int position);
+
+    void showProgressBar(int position);
+
+    void hideProgressBar(int position);
+
 }

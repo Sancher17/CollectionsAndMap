@@ -18,17 +18,17 @@ class MapsPresenter  {
     private IMapProcessor processor = new MapsProcessor();
 
 //    @Override
-//    public void doTask() {
-//        LOGGER.log("doTask called");
+//    public void calculate() {
+//        LOGGER.log("calculate called");
 //        LOGGER.log("quantity of CPU " + core);
-//        map.runBackground(0, new TreeMap(), processor::add);
-//        map.runBackground(1, new HashMap(), processor::add);
+//        map.doCalculateBackground(0, new TreeMap(), processor::add);
+//        map.doCalculateBackground(1, new HashMap(), processor::add);
 //
-//        map.runBackground(2, new TreeMap(), processor::search);
-//        map.runBackground(3, new HashMap(), processor::search);
+//        map.doCalculateBackground(2, new TreeMap(), processor::search);
+//        map.doCalculateBackground(3, new HashMap(), processor::search);
 //
-//        map.runBackground(4, new TreeMap(), processor::remove);
-//        map.runBackground(5, new HashMap(), processor::remove);
+//        map.doCalculateBackground(4, new TreeMap(), processor::remove);
+//        map.doCalculateBackground(5, new HashMap(), processor::remove);
 //    }
 //
 //    @Override

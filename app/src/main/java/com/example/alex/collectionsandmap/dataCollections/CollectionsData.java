@@ -25,10 +25,6 @@ public class CollectionsData implements CollectionsRepository {
 
     public static ArrayList<CollectionsData> list = new ArrayList<>();
 
-    public void addItemsInList() {
-        //now new  - createData() below
-    }
-
     //getter - setter
     public String getAction() {
         return action;
@@ -54,10 +50,6 @@ public class CollectionsData implements CollectionsRepository {
         this.resultOfCalculation = resultOfCalculation;
     }
 
-    @Override
-    public void getData() {
-
-    }
 
     @Override
     public void createData() {
@@ -90,6 +82,7 @@ public class CollectionsData implements CollectionsRepository {
             }
         }
     }
+
 
 }
 

@@ -23,7 +23,7 @@ public class ExecutorMap extends AppCompatActivity {
 
 
     public void runBackground(final int position, Map map, IMaps func) {
-        LOGGER.log("runBackground called // position " + position);
+        LOGGER.log("doCalculateBackground called // position " + position);
         MapsData.list.get(position).setProgressBar(true);
         MapsData.list.get(position).setResultOfCalculation(0);
         MapsFragmentTab.adapter.notifyDataSetChanged();

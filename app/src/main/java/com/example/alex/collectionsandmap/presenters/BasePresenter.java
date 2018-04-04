@@ -17,15 +17,15 @@ public class BasePresenter {
 //        this.iView = iView;
 //    }
 //
-//    public void calculate() {
-//        LOGGER.log("calculate called");
+//    public void runCalculate() {
+//        LOGGER.log("runCalculate called");
 //
 //        if (GET_POSITION_TAB == 0) {
 //            iCollectionsPresenter = new CollectionsPresenter();
-//            iCollectionsPresenter.doTask();
+//            iCollectionsPresenter.runCalculate();
 //        } else {
 //            iMapsPresenter = new MapsPresenter();
-//            iMapsPresenter.doTask();
+//            iMapsPresenter.runCalculate();
 //        }
 //    }
 
@@ -147,8 +147,8 @@ public class BasePresenter {
 
 //        LOGGER.log("BEFORE registerCallback() ");
 //        collection.registerCallback(ft1);
-//        LOGGER.log("BEFORE doTask() ");
-//        collection.doTask();
+//        LOGGER.log("BEFORE runCalculate() ");
+//        collection.runCalculate();
 //
 *end
 

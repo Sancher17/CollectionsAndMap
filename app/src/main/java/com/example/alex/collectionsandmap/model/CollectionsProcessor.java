@@ -1,5 +1,9 @@
 package com.example.alex.collectionsandmap.model;
 
+import com.example.alex.collectionsandmap.adapters.CollectionsAdapter;
+import com.example.alex.collectionsandmap.collections.CollectionsPresenter;
+import com.example.alex.collectionsandmap.dataCollections.CollectionsData;
+import com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService.ExecutorCollectionCallback;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 import java.util.List;
@@ -18,6 +22,7 @@ public class CollectionsProcessor implements ICollectionsProcessor {
         }
         int result = (int) (System.currentTimeMillis() - t1);
         LOGGER.log("addToStart // size " + list.size() + "// result " + result + getClassName(list));
+
         return result;
     }
 
@@ -104,6 +109,5 @@ public class CollectionsProcessor implements ICollectionsProcessor {
     private static String getClassName(List list){
         return " // " + list.getClass().getSimpleName();
     }
-
 }
 

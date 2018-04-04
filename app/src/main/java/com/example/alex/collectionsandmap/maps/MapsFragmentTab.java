@@ -64,6 +64,21 @@ public class MapsFragmentTab extends Fragment implements MapsContract.View {
     }
 
     @Override
+    public void updateItemAdapter(int position) {
+
+    }
+
+    @Override
+    public void showProgressBar(int position) {
+
+    }
+
+    @Override
+    public void hideProgressBar(int position) {
+
+    }
+
+    @Override
     public void onButtonClick() {
 
     }

@@ -1,8 +1,10 @@
 package com.example.alex.collectionsandmap.collections;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,30 +17,38 @@ import com.example.alex.collectionsandmap.adapters.CollectionsAdapter;
 import com.example.alex.collectionsandmap.dataCollections.CollectionsData;
 import com.example.alex.collectionsandmap.utils.Logger;
 
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.UiThread;
+
+import java.util.ArrayList;
+
+
 public class CollectionsFragment extends Fragment implements CollectionsContract.View {
 
     private static Logger LOGGER = new Logger(CollectionsFragment.class);
 
-    //    public static CollectionsAdapter adapter; //was
-    private CollectionsAdapter adapter; // now
-    private CollectionsContract.Presenter presenter  = new CollectionsPresenter(this);
 
-    CollectionsData collections = new CollectionsData();
+    public static CollectionsAdapter adapter = new CollectionsAdapter(CollectionsData.list);
+    private CollectionsContract.Presenter presenter  = new CollectionsPresenter(this);
 
     public CollectionsFragment() {
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        adapter = new CollectionsAdapter(new ArrayList<CollectionsData>());// тут пока не готово //
-        adapter = new CollectionsAdapter(CollectionsData.list);
+
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
 //        presenter.loadData(); // пока не готово
+//        adapter.notifyDataSetChanged(); // не помогает
+//        adapter.swapItems(adapter.getItems()); // не помогает
     }
 
 
@@ -48,7 +58,6 @@ public class CollectionsFragment extends Fragment implements CollectionsContract
 
         RecyclerView recyclerView = (RecyclerView) inflater.inflate
                 (R.layout.fragment_tab1, container, false);
-
 
         //creating first data
         presenter.createData();
@@ -70,12 +79,12 @@ public class CollectionsFragment extends Fragment implements CollectionsContract
 
     @Override
     public void onCalculationFinished() {
-        Toast.makeText(getActivity(), "Calculation is done", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "Calculation is done", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onDataIsStillLoadingError() {
-        Toast.makeText(getActivity(), "Calculation is still running!", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), "Calculation is still running!", Toast.LENGTH_SHORT).show();
     }
 
 
@@ -83,7 +92,7 @@ public class CollectionsFragment extends Fragment implements CollectionsContract
     public void onStartCalculation() {
         LOGGER.log("onStartCalculation");
 //        Toast.makeText(getContext(), "Calculation is starting", Toast.LENGTH_SHORT).show();
-        presenter.doTask();
+        presenter.calculate();
     }
 
     @Override
@@ -98,19 +107,36 @@ public class CollectionsFragment extends Fragment implements CollectionsContract
 
     @Override
     public void updateAdapter() {
-        adapter.notifyDataSetChanged();
+//        adapter.notifyDataSetChanged();
     }
 
-//    @Override
-//    public void showResult() {
-//        adapter.notifyDataSetChanged();
-//    }
+    @Override
+    public void updateItemAdapter(int position) {
+        adapter.notifyItemChanged(position);
+        LOGGER.log("notifyItemChanged");
+    }
+
+    @Override
+    public void showProgressBar(int position){
+        LOGGER.log("showProgressBar");
+        adapter.notifyItemChanged(position);
+    }
 
 
-//    public void onDataSetChanged(List<Cell> list) {
-//        LOGGER.log(list.toString());
-//        adapter.setData(list);
-//    }
+    @Override
+    public void hideProgressBar(int position){
+        LOGGER.log("hideProgressBar");
+        CollectionsData.list.get(0).setProgressBar(false);
+        adapter.notifyItemChanged(position);
+        LOGGER.log(" action " + CollectionsData.list.get(0).getAction()
+        + "\n name " + CollectionsData.list.get(0).getName()
+        + "\n progress bar " + CollectionsData.list.get(0).getProgressBar()
+        + "\n result " + CollectionsData.list.get(0).getResultOfCalculation());
+
+
+    }
+
+
 
 //    @Override  // для примера
 //    public void setProgressIndicator(final boolean active) {

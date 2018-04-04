@@ -3,7 +3,7 @@
 //
 //public interface ICollectionsPresenter {
 //
-//    void doTask();
+//    void calculate();
 //
 //    void updateAdapterItem(int position);
 //}

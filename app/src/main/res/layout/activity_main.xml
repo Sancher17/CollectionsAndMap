@@ -83,6 +83,17 @@
             android:hint="@string/enter_namber_elements"
             android:inputType="number" />
 
+        <Button
+            android:id="@+id/button_allItem"
+            android:text="Log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/button_update"
+            android:text="upd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 

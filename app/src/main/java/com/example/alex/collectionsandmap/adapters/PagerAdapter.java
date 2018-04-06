@@ -26,7 +26,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return new MapsFragmentTab();
             default:
-                return null;
+                return new CollectionsFragment();
         }
     }
 

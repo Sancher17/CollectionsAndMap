@@ -3,5 +3,7 @@ package com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService;
 
 public interface ExecutorCollectionCallback {
 
-    void response(int position);
+    void responseHideProgress(int position);
+
+    void responseShowProgress(int position);
 }

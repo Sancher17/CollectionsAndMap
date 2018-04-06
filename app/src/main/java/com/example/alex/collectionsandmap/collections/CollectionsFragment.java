@@ -1,10 +1,8 @@
 package com.example.alex.collectionsandmap.collections;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,68 +12,47 @@ import android.widget.Toast;
 
 import com.example.alex.collectionsandmap.R;
 import com.example.alex.collectionsandmap.adapters.CollectionsAdapter;
+import com.example.alex.collectionsandmap.dagger.AppInject;
 import com.example.alex.collectionsandmap.dataCollections.CollectionsData;
 import com.example.alex.collectionsandmap.utils.Logger;
 
-import org.androidannotations.annotations.EFragment;
-import org.androidannotations.annotations.UiThread;
+import javax.inject.Inject;
 
-import java.util.ArrayList;
-
-
-public class CollectionsFragment extends Fragment implements CollectionsContract.View {
+public final class CollectionsFragment extends Fragment implements CollectionsContract.View {
 
     private static Logger LOGGER = new Logger(CollectionsFragment.class);
 
+    @Inject
+    CollectionsAdapter adapter;
+//    public static CollectionsAdapter adapter = new CollectionsAdapter(CollectionsData.list);
 
-    public static CollectionsAdapter adapter = new CollectionsAdapter(CollectionsData.list);
-    private CollectionsContract.Presenter presenter  = new CollectionsPresenter(this);
-
-    public CollectionsFragment() {
-    }
-
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        adapter = new CollectionsAdapter(new ArrayList<CollectionsData>());// тут пока не готово //
-
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-//        presenter.loadData(); // пока не готово
-//        adapter.notifyDataSetChanged(); // не помогает
-//        adapter.swapItems(adapter.getItems()); // не помогает
-    }
-
+    @Inject
+    CollectionsPresenter presenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LOGGER.log("onCreateView");
 
-        RecyclerView recyclerView = (RecyclerView) inflater.inflate
-                (R.layout.fragment_tab1, container, false);
+        RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_tab1, container, false);
 
+//        AppInject.getComponent().inject(this); //inject method
+        ((AppInject) getActivity().getApplication()).getComponent().inject(this);
         //creating first data
         presenter.createData();
 
         int numColumns = getContext().getResources().getInteger(R.integer.num_collections_columns);
-
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numColumns));
         recyclerView.setAdapter(adapter);
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), numColumns);
-        recyclerView.setLayoutManager(layoutManager);
 
         return recyclerView;
     }
 
 
-    @Override
-    public void setPresenter(CollectionsContract.Presenter presenter) {
 
-    }
+
+
+
+
 
     @Override
     public void onCalculationFinished() {
@@ -87,13 +64,45 @@ public class CollectionsFragment extends Fragment implements CollectionsContract
 //        Toast.makeText(getActivity(), "Calculation is still running!", Toast.LENGTH_SHORT).show();
     }
 
-
     @Override
     public void onStartCalculation() {
-        LOGGER.log("onStartCalculation");
+        Activity activity = getActivity();
+        LOGGER.log("avtivity " + activity);
+        if(activity != null){
+        Toast.makeText(getActivity().getApplicationContext(), "Calculation is starting", Toast.LENGTH_SHORT).show();
+        }
+
 //        Toast.makeText(getContext(), "Calculation is starting", Toast.LENGTH_SHORT).show();
+        getInject();
         presenter.calculate();
     }
+
+    /** from Dima project */
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        presenter.attachView(this);
+    }
+
+    @Override
+    public void onStop() {
+        presenter.detachView();
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+
+
+
+    /***/
+
+
+
 
     @Override
     public void onButtonClick() {
@@ -107,54 +116,45 @@ public class CollectionsFragment extends Fragment implements CollectionsContract
 
     @Override
     public void updateAdapter() {
-//        adapter.notifyDataSetChanged();
+        LOGGER.log("updateAdapter");
+        getInject();
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void updateItemAdapter(int position) {
+        getInject();
         adapter.notifyItemChanged(position);
-        LOGGER.log("notifyItemChanged");
+        LOGGER.log("notifyItemChanged // adapter // " + adapter.toString());
     }
 
     @Override
     public void showProgressBar(int position){
         LOGGER.log("showProgressBar");
-        adapter.notifyItemChanged(position);
+        CollectionsData.list.get(position).setProgressBar(true);
+        updateItemAdapter(position);
     }
-
 
     @Override
     public void hideProgressBar(int position){
         LOGGER.log("hideProgressBar");
-        CollectionsData.list.get(0).setProgressBar(false);
-        adapter.notifyItemChanged(position);
-        LOGGER.log(" action " + CollectionsData.list.get(0).getAction()
-        + "\n name " + CollectionsData.list.get(0).getName()
-        + "\n progress bar " + CollectionsData.list.get(0).getProgressBar()
-        + "\n result " + CollectionsData.list.get(0).getResultOfCalculation());
+        CollectionsData.list.get(position).setProgressBar(false);
+        updateItemAdapter(position);
+    }
 
-
+    void getInject(){
+        AppInject.getComponent().inject(this);
     }
 
 
-
-//    @Override  // для примера
-//    public void setProgressIndicator(final boolean active) {
-//
-//        if (getView() == null) {
-//            return;
-//        }
-//        final SwipeRefreshLayout srl =
-//                (SwipeRefreshLayout) getView().findViewById(R.id.refresh_layout);
-//
-//        // Make sure setRefreshing() is called after the layout is done with everything else.
-//        srl.post(new Runnable() {
-//            @Override
-//            public void run() {
-//                srl.setRefreshing(active);
-//            }
-//        });
-//    }
+    public void allItems(){
+        for (int i = 0; i < 3; i++) {
+            LOGGER.log(" action " + CollectionsData.list.get(i).getAction()
+                    + "\n name " + CollectionsData.list.get(i).getName()
+                    + "\n progress bar " + CollectionsData.list.get(i).getProgressBar()
+                    + "\n result " + CollectionsData.list.get(i).getResultOfCalculation());
+        }
+    }
 
 }
 

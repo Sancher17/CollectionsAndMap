@@ -1,9 +1,7 @@
 package com.example.alex.collectionsandmap;
 
 
-public interface BaseView <T>{
-
-    void setPresenter(T presenter);
+public interface BaseView {
 
     void onStartCalculation();
 

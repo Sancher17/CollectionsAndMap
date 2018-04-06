@@ -23,13 +23,9 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity {
 
     private static Logger LOGGER = new Logger(MainActivity.class);
-//    private BasePresenter presenter = new BasePresenter();
+
     public static int GET_POSITION_TAB = 0;
     public static int INPUT_NUMBER;
-
-    public PagerAdapter adapter;
-
-    BasePresenter iPresenter;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -51,22 +47,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        LOGGER.log("MainActivity started");
-
-//        if(iPresenter == null){
-//            iPresenter = new com.example.alex.collectionsandmap.presenters.BasePresenter(this);
-//        }
 
         setSupportActionBar(toolbar);
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_1));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_2));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 toolbar.setTitle(tab.getText());
@@ -97,15 +88,25 @@ public class MainActivity extends AppCompatActivity {
         }
 
         String number = input.getText().toString();
-        if (number.length() > 0 ) {
+        if (number.length() > 0) {
             INPUT_NUMBER = Integer.parseInt(number);
-            // TODO: 30.03.2018 - переадать клик во фрагмент
-//            iPresenter.runCalculate();
             CollectionsFragment cf = new CollectionsFragment();
             cf.onStartCalculation();
-        }else {
+        } else {
             Toast.makeText(this, " Введите число", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @OnClick(R.id.button_allItem)
+    public void getAll() {
+        CollectionsFragment cf = new CollectionsFragment();
+        cf.allItems();
+    }
+
+    @OnClick(R.id.button_update)
+    public void update() {
+        CollectionsFragment cf1 = new CollectionsFragment();
+        cf1.updateAdapter();
     }
 
 

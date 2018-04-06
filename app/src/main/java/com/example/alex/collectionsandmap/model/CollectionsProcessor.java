@@ -22,7 +22,7 @@ public class CollectionsProcessor implements ICollectionsProcessor {
         }
         int result = (int) (System.currentTimeMillis() - t1);
         LOGGER.log("addToStart // size " + list.size() + "// result " + result + getClassName(list));
-
+        LOGGER.log("run 2 "+ Thread.currentThread() + " result " + result);
         return result;
     }
 

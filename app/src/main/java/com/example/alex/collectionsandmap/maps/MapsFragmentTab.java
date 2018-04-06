@@ -39,11 +39,6 @@ public class MapsFragmentTab extends Fragment implements MapsContract.View {
     }
 
     @Override
-    public void setPresenter(MapsContract.Presenter presenter) {
-
-    }
-
-    @Override
     public void onStartCalculation() {
 
     }

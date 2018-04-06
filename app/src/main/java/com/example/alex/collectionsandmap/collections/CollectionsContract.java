@@ -5,7 +5,7 @@ import com.example.alex.collectionsandmap.BaseView;
 
 public interface CollectionsContract {
 
-    interface View extends BaseView<Presenter>{
+    interface View extends BaseView{
 
         void onButtonClick();
 

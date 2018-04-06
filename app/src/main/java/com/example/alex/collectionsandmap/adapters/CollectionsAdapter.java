@@ -15,6 +15,8 @@ import com.example.alex.collectionsandmap.utils.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -35,7 +37,7 @@ public class CollectionsAdapter extends RecyclerView.Adapter<CollectionsAdapter.
     @BindView(R.id.progress)
     ProgressBar progressBar;
 
-
+    @Inject
     public CollectionsAdapter(ArrayList items) {}
 
     static class ViewHolder extends RecyclerView.ViewHolder {

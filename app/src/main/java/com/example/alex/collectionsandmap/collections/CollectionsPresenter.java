@@ -1,14 +1,11 @@
 package com.example.alex.collectionsandmap.collections;
 
-import com.example.alex.collectionsandmap.BasePresenterDima;
-import com.example.alex.collectionsandmap.dagger.AppInject;
 import com.example.alex.collectionsandmap.dataCollections.CollectionsData;
 import com.example.alex.collectionsandmap.dataCollections.CollectionsRepository;
 import com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService.ExecutorCollection;
 import com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService.ExecutorCollectionCallback;
 import com.example.alex.collectionsandmap.model.CollectionsProcessor;
 import com.example.alex.collectionsandmap.model.ICollectionsProcessor;
-import com.example.alex.collectionsandmap.presenters.BasePresenter;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 import java.util.ArrayList;
@@ -17,11 +14,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.inject.Inject;
 
-public class CollectionsPresenter extends BasePresenterDima<CollectionsContract.View> implements CollectionsContract.Presenter, CollectionsRepository, ExecutorCollectionCallback {
+public class CollectionsPresenter implements CollectionsContract.Presenter, CollectionsRepository, ExecutorCollectionCallback {
 
     private static Logger LOGGER = new Logger(CollectionsPresenter.class);
 
-    //    private ExecutorCollection executor; //dagger
     private ExecutorCollection executor = new ExecutorCollection(this);
     private CollectionsRepository repository = new CollectionsData();
     private CollectionsContract.View view;
@@ -33,19 +29,10 @@ public class CollectionsPresenter extends BasePresenterDima<CollectionsContract.
     }
 
     @Override
-    public void attachView(CollectionsContract.View view) {
-       super.attachView(view);
-    }
-
-    @Override
-    public void detachView() {
-        super.detachView();
-    }
-
-
-    @Override
     public void calculate() {
         LOGGER.log("calculate");
+
+        view.onCalculationStarted();
 
         executor.doCalculateBackground(0, new ArrayList(), processor::addToStart);
         executor.doCalculateBackground(1, new LinkedList<>(), processor::addToStart);
@@ -74,7 +61,6 @@ public class CollectionsPresenter extends BasePresenterDima<CollectionsContract.
         executor.doCalculateBackground(18, new ArrayList<>(), processor::removeEnd);
         executor.doCalculateBackground(19, new LinkedList<>(), processor::removeEnd);
         executor.doCalculateBackground(20, new CopyOnWriteArrayList(), processor::removeEnd);
-
     }
 
     @Override
@@ -94,9 +80,7 @@ public class CollectionsPresenter extends BasePresenterDima<CollectionsContract.
         view.hideProgressBar(position);
     }
 
-    /**
-     * MODEL
-     */
+    //MODEL
     @Override
     public void createData() {
         LOGGER.log("createData");

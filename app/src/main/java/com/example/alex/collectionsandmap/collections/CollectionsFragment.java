@@ -1,15 +1,18 @@
 package com.example.alex.collectionsandmap.collections;
 
-import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.alex.collectionsandmap.MainActivity;
 import com.example.alex.collectionsandmap.R;
 import com.example.alex.collectionsandmap.adapters.CollectionsAdapter;
 import com.example.alex.collectionsandmap.dagger.AppInject;
@@ -21,10 +24,13 @@ import javax.inject.Inject;
 public final class CollectionsFragment extends Fragment implements CollectionsContract.View {
 
     private static Logger LOGGER = new Logger(CollectionsFragment.class);
+    private String TAG = "life";
 
-    @Inject
-    CollectionsAdapter adapter;
-//    public static CollectionsAdapter adapter = new CollectionsAdapter(CollectionsData.list);
+    // TODO: 08.04.2018 Don't work without STATIC adapter
+//    @Inject
+//    CollectionsAdapter adapter;
+
+    public static CollectionsAdapter adapter = new CollectionsAdapter(CollectionsData.list);
 
     @Inject
     CollectionsPresenter presenter;
@@ -32,11 +38,11 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LOGGER.log("onCreateView");
+        Log.d(TAG, "onCreateView: ");
 
         RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_tab1, container, false);
 
-//        AppInject.getComponent().inject(this); //inject method
-        ((AppInject) getActivity().getApplication()).getComponent().inject(this);
+        AppInject.getComponent().inject(this); //inject method
         //creating first data
         presenter.createData();
 
@@ -46,13 +52,6 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
 
         return recyclerView;
     }
-
-
-
-
-
-
-
 
     @Override
     public void onCalculationFinished() {
@@ -65,43 +64,18 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
     }
 
     @Override
-    public void onStartCalculation() {
-        Activity activity = getActivity();
-        LOGGER.log("avtivity " + activity);
-        if(activity != null){
-        Toast.makeText(getActivity().getApplicationContext(), "Calculation is starting", Toast.LENGTH_SHORT).show();
-        }
-
+    public void onCalculationStarted(){
+        Log.d(TAG, "onCalculationStarted: ");
+        // TODO: 08.04.2018 Can't get Context
 //        Toast.makeText(getContext(), "Calculation is starting", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onStartCalculation() {
+        Log.d(TAG, "onStartCalculation: " );
         getInject();
         presenter.calculate();
     }
-
-    /** from Dima project */
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        presenter.attachView(this);
-    }
-
-    @Override
-    public void onStop() {
-        presenter.detachView();
-        super.onStop();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
-
-
-
-
-    /***/
-
-
 
 
     @Override
@@ -156,6 +130,68 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
         }
     }
 
+
+
+    // lifecycle
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Log.d(TAG, "onAttach: ");
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate: ");
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        Log.d(TAG, "onActivityCreated: ");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: " + getActivity().toString());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: ");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: ");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d(TAG, "onDetach: ");
+    }
+
+    @Override
+    public void onStart() {
+        Log.d(TAG, "onStart: ");
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        Log.d(TAG, "onStop: ");
+        super.onStop();
+    }
+
+    @Override
+    public void onDestroyView() {
+        Log.d(TAG, "onDestroyView: ");
+        super.onDestroyView();
+    }
 }
 
 

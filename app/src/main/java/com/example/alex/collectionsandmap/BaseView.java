@@ -17,4 +17,6 @@ public interface BaseView {
 
     void hideProgressBar(int position);
 
+    void onCalculationStarted();
+
 }

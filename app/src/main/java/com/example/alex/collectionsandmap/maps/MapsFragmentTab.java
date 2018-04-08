@@ -74,6 +74,11 @@ public class MapsFragmentTab extends Fragment implements MapsContract.View {
     }
 
     @Override
+    public void onCalculationStarted() {
+
+    }
+
+    @Override
     public void onButtonClick() {
 
     }

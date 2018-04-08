@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_2));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
+        PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
             INPUT_NUMBER = Integer.parseInt(number);
             CollectionsFragment cf = new CollectionsFragment();
             cf.onStartCalculation();
+            Toast.makeText(this, " Вычесление началось", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, " Введите число", Toast.LENGTH_SHORT).show();
         }
@@ -105,8 +106,6 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.button_update)
     public void update() {
-        CollectionsFragment cf1 = new CollectionsFragment();
-        cf1.updateAdapter();
     }
 
 

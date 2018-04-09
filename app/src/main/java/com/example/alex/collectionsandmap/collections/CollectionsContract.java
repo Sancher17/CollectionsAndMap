@@ -9,7 +9,7 @@ public interface CollectionsContract {
 
         void onButtonClick();
 
-        void showError();
+        void showErrorEmptyNumber();
     }
 
     interface Presenter extends BasePresenter{

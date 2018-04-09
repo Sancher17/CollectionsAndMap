@@ -1,5 +1,6 @@
 package com.example.alex.collectionsandmap.maps;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -13,27 +14,24 @@ import com.example.alex.collectionsandmap.adapters.MapsAdapter;
 import com.example.alex.collectionsandmap.model.repository.MapsData;
 import com.example.alex.collectionsandmap.utils.Logger;
 
-public class MapsFragmentTab extends Fragment implements MapsContract.View {
+public class MapsFragment extends Fragment implements MapsContract.View {
 
-    private static Logger LOGGER = new Logger(MapsFragmentTab.class);
+    private static Logger LOGGER = new Logger(MapsFragment.class);
     public static MapsAdapter adapter;
     MapsData maps = new MapsData();
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        RecyclerView collectionsRecycler = (RecyclerView) inflater.inflate
-                (R.layout.fragment_tab1, container, false);
-        LOGGER.log("onCreateView");
 
-        if (MapsData.list.size() == 0) {
-            maps.addItemsInList();
-        }
+        View root = inflater.inflate(R.layout.fragment_tab2, container, false);
+
+        RecyclerView collectionsRecycler = root.findViewById(R.id.tab2_recycler);
+
 
         adapter = new MapsAdapter(MapsData.list);
         collectionsRecycler.setAdapter(adapter);
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
-        collectionsRecycler.setLayoutManager(layoutManager);
+        collectionsRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 2));
 
         return collectionsRecycler;
     }

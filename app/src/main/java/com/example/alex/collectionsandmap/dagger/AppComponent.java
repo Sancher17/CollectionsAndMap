@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.alex.collectionsandmap.adapters.CollectionsAdapter;
 import com.example.alex.collectionsandmap.collections.CollectionAdapterModule;
 import com.example.alex.collectionsandmap.collections.CollectionFragmentModule;
+import com.example.alex.collectionsandmap.collections.CollectionPresenterModule;
 import com.example.alex.collectionsandmap.collections.CollectionsContract;
 import com.example.alex.collectionsandmap.collections.CollectionsFragment;
 import com.example.alex.collectionsandmap.collections.CollectionsPresenter;
@@ -22,7 +23,8 @@ import dagger.Provides;
 @Component(modules = {
         CollectionFragmentModule.class,
         CollectionAdapterModule.class,
-        ContextModule.class
+        ContextModule.class,
+        CollectionPresenterModule.class
 })
 @Singleton
 public interface AppComponent {
@@ -31,8 +33,8 @@ public interface AppComponent {
 
 //    Context context();
 
-    void inject(CollectionsFragment collectionsFragment);//inject method
-
+    void inject(CollectionsFragment collectionsFragment);
+    void inject(CollectionsPresenter collectionsPresenter);
 
 
 }

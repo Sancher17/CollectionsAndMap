@@ -20,12 +20,9 @@ public class ExecutorCollection {
 
     private ExecutorCollectionCallback callback;
 
+    @Inject
     public ExecutorCollection(ExecutorCollectionCallback callback){
         this.callback = callback;
-    }
-
-    @Inject
-    public ExecutorCollection() {
     }
 
     public void doCalculateBackground(final int position, List list, ICollections func){

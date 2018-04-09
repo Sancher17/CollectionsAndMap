@@ -1,6 +1,8 @@
 package com.example.alex.collectionsandmap;
 
 
+import android.content.Context;
+
 public interface BaseView {
 
     void onStartCalculation();

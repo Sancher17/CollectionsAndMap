@@ -10,9 +10,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.alex.collectionsandmap.MainActivity;
 import com.example.alex.collectionsandmap.R;
 import com.example.alex.collectionsandmap.adapters.CollectionsAdapter;
 import com.example.alex.collectionsandmap.dagger.AppInject;
@@ -21,10 +22,15 @@ import com.example.alex.collectionsandmap.utils.Logger;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public final class CollectionsFragment extends Fragment implements CollectionsContract.View {
 
     private static Logger LOGGER = new Logger(CollectionsFragment.class);
     private String TAG = "life";
+    public static int INPUT_NUMBER;
 
     // TODO: 08.04.2018 Don't work without STATIC adapter
 //    @Inject
@@ -35,12 +41,21 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
     @Inject
     CollectionsPresenter presenter;
 
+    @BindView(R.id.tab1_recycler)
+    RecyclerView recyclerView;
+
+    @BindView(R.id.editText_input_fragment)
+    EditText interNumber;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LOGGER.log("onCreateView");
         Log.d(TAG, "onCreateView: ");
 
-        RecyclerView recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_tab1, container, false);
+        View root = inflater.inflate(R.layout.fragment_tab1, container, false);
+        ButterKnife.bind(this, root);
+
+        recyclerView = root.findViewById(R.id.tab1_recycler);
 
         AppInject.getComponent().inject(this); //inject method
         //creating first data
@@ -50,7 +65,30 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numColumns));
         recyclerView.setAdapter(adapter);
 
-        return recyclerView;
+        return root;
+    }
+
+
+    @OnClick(R.id.button_calculate)
+    public void clickCalculation(){
+
+        View view = getActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+        }
+
+        String number = interNumber.getText().toString();
+        if (number.length() > 0) {
+            INPUT_NUMBER = Integer.parseInt(number);
+            onCalculationStarted();
+            getInject();
+            presenter.calculate();
+        } else {
+           showErrorEmptyNumber();
+        }
     }
 
     @Override
@@ -66,8 +104,7 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
     @Override
     public void onCalculationStarted(){
         Log.d(TAG, "onCalculationStarted: ");
-        // TODO: 08.04.2018 Can't get Context
-//        Toast.makeText(getContext(), "Calculation is starting", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Calculation is starting", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -77,15 +114,15 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
         presenter.calculate();
     }
 
-
     @Override
     public void onButtonClick() {
 
     }
 
     @Override
-    public void showError() {
-
+    public void showErrorEmptyNumber() {
+        // TODO: 08.04.2018  If it is called from another class - Context is missing
+        Toast.makeText(getContext(), " Введите число", Toast.LENGTH_SHORT).show();
     }
 
     @Override

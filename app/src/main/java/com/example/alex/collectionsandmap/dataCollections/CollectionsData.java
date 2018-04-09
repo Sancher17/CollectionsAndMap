@@ -4,6 +4,8 @@ import com.example.alex.collectionsandmap.utils.Logger;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 public class CollectionsData implements CollectionsRepository {
 
     private static Logger LOGGER = new Logger(CollectionsData.class);
@@ -13,6 +15,7 @@ public class CollectionsData implements CollectionsRepository {
     private int resultOfCalculation = 0;
     private boolean progressBar = false;
 
+    @Inject
     public CollectionsData() {
     }
 

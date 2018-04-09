@@ -2,10 +2,13 @@ package com.example.alex.collectionsandmap;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -24,8 +27,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static Logger LOGGER = new Logger(MainActivity.class);
 
+    String TAG = "life";
+
     public static int GET_POSITION_TAB = 0;
-    public static int INPUT_NUMBER;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -36,11 +40,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.pager)
     ViewPager viewPager;
 
-    @BindView(R.id.button_calculate)
-    Button buttonCalculate;
-
-    @BindView(R.id.editText_input)
-    EditText input;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,37 +75,44 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @OnClick(R.id.button_calculate)
-    public void onGetButtonClick() {
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager)
-                    getSystemService(Context.INPUT_METHOD_SERVICE);
-            if (imm != null) {
-                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-            }
-        }
 
-        String number = input.getText().toString();
-        if (number.length() > 0) {
-            INPUT_NUMBER = Integer.parseInt(number);
-            CollectionsFragment cf = new CollectionsFragment();
-            cf.onStartCalculation();
-            Toast.makeText(this, " Вычесление началось", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, " Введите число", Toast.LENGTH_SHORT).show();
-        }
+
+    // lifecycle
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume: MainActivity" );
     }
 
-    @OnClick(R.id.button_allItem)
-    public void getAll() {
-        CollectionsFragment cf = new CollectionsFragment();
-        cf.allItems();
-    }
-
-    @OnClick(R.id.button_update)
-    public void update() {
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause: MainActivity ");
     }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: MainActivity");
+    }
+
+   
+    @Override
+    public void onStart() {
+        Log.d(TAG, "onStart: MainActivity");
+        super.onStart();
+    }
+
+    @Override
+    public void onStop() {
+        Log.d(TAG, "onStop: MainActivity");
+        super.onStop();
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        super.onAttachFragment(fragment);
+        Log.d(TAG, "onAttachFragment: MainActivity");
+    }
 }

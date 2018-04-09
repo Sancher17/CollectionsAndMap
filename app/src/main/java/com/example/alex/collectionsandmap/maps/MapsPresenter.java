@@ -33,6 +33,6 @@ class MapsPresenter  {
 //
 //    @Override
 //    public void updateAdapterItem(int position) {
-//        MapsFragmentTab.adapter.notifyItemChanged(position);
+//        MapsFragment.adapter.notifyItemChanged(position);
 //    }
 }

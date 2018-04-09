@@ -53,6 +53,7 @@ public class CollectionsAdapter extends RecyclerView.Adapter<CollectionsAdapter.
     public CollectionsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, final int viewType) {
         CardView cv = (CardView) LayoutInflater.from(parent.getContext()).inflate
                 (R.layout.card_captioned_image, parent, false);
+
         return new ViewHolder(cv);
     }
 
@@ -78,8 +79,4 @@ public class CollectionsAdapter extends RecyclerView.Adapter<CollectionsAdapter.
         return CollectionsData.list.size();
     }
 
-//    public void swapItems(ArrayList<CollectionsData> items) {
-//        this.items = items;
-//        notifyDataSetChanged();
-//    }
 }

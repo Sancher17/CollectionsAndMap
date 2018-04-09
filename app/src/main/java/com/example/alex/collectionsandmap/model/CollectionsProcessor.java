@@ -1,18 +1,20 @@
 package com.example.alex.collectionsandmap.model;
 
-import com.example.alex.collectionsandmap.adapters.CollectionsAdapter;
-import com.example.alex.collectionsandmap.collections.CollectionsPresenter;
-import com.example.alex.collectionsandmap.dataCollections.CollectionsData;
-import com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService.ExecutorCollectionCallback;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 import java.util.List;
 
-import static com.example.alex.collectionsandmap.MainActivity.INPUT_NUMBER;
+import javax.inject.Inject;
+
+import static com.example.alex.collectionsandmap.collections.CollectionsFragment.INPUT_NUMBER;
 
 public class CollectionsProcessor implements ICollectionsProcessor {
 
     private static Logger LOGGER = new Logger(CollectionsProcessor.class);
+
+    @Inject
+    public CollectionsProcessor() {
+    }
 
     public int addToStart(List<Integer> list) {
         list.clear();

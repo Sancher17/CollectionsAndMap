@@ -1,5 +1,7 @@
 package com.example.alex.collectionsandmap.collections;
 
+import com.example.alex.collectionsandmap.dagger.AppComponent;
+import com.example.alex.collectionsandmap.dagger.AppInject;
 import com.example.alex.collectionsandmap.dataCollections.CollectionsData;
 import com.example.alex.collectionsandmap.dataCollections.CollectionsRepository;
 import com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService.ExecutorCollection;
@@ -18,21 +20,26 @@ public class CollectionsPresenter implements CollectionsContract.Presenter, Coll
 
     private static Logger LOGGER = new Logger(CollectionsPresenter.class);
 
+    // TODO: 09.04.2018 Can't inject with callback
     private ExecutorCollection executor = new ExecutorCollection(this);
-    private CollectionsRepository repository = new CollectionsData();
+
     private CollectionsContract.View view;
-    private ICollectionsProcessor processor = new CollectionsProcessor();
+
+    @Inject
+    CollectionsRepository repository = new CollectionsData();
+
+    @Inject
+    ICollectionsProcessor processor;
 
     @Inject
     public CollectionsPresenter(CollectionsContract.View view) {
         this.view = view;
+        AppInject.getComponent().inject(this);
     }
 
     @Override
     public void calculate() {
         LOGGER.log("calculate");
-
-        view.onCalculationStarted();
 
         executor.doCalculateBackground(0, new ArrayList(), processor::addToStart);
         executor.doCalculateBackground(1, new LinkedList<>(), processor::addToStart);

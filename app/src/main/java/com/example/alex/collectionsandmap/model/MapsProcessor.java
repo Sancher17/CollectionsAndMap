@@ -2,7 +2,9 @@ package com.example.alex.collectionsandmap.model;
 
 import com.example.alex.collectionsandmap.utils.Logger;
 import java.util.Map;
-import static com.example.alex.collectionsandmap.MainActivity.INPUT_NUMBER;
+
+import static com.example.alex.collectionsandmap.collections.CollectionsFragment.INPUT_NUMBER; // TODO: 08.04.2018 must change it
+
 
 public class MapsProcessor implements IMapProcessor{
 

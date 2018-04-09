@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.alex.collectionsandmap.model.repository.MapsData;
 import com.example.alex.collectionsandmap.utils.Logger;
-import com.example.alex.collectionsandmap.maps.MapsFragmentTab;
+import com.example.alex.collectionsandmap.maps.MapsFragment;
 
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -26,7 +26,7 @@ public class ExecutorMap extends AppCompatActivity {
         LOGGER.log("doCalculateBackground called // position " + position);
         MapsData.list.get(position).setProgressBar(true);
         MapsData.list.get(position).setResultOfCalculation(0);
-        MapsFragmentTab.adapter.notifyDataSetChanged();
+        MapsFragment.adapter.notifyDataSetChanged();
         executor.submit(new Runnable() {
             @Override
             public void run() {
@@ -37,7 +37,7 @@ public class ExecutorMap extends AppCompatActivity {
                 runOnUiThread(() -> {
                     LOGGER.log("runOnUiThread // position " + position + " // result " + result);
                     MapsData.list.get(position).setProgressBar(false);
-                    MapsFragmentTab.adapter.notifyItemChanged(position);
+                    MapsFragment.adapter.notifyItemChanged(position);
                 });
             }
         });

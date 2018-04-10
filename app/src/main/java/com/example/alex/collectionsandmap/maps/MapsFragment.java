@@ -1,6 +1,5 @@
 package com.example.alex.collectionsandmap.maps;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,8 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.alex.collectionsandmap.R;
-import com.example.alex.collectionsandmap.adapters.MapsAdapter;
-import com.example.alex.collectionsandmap.model.repository.MapsData;
+import com.example.alex.collectionsandmap.dataMaps.MapsData;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 public class MapsFragment extends Fragment implements MapsContract.View {

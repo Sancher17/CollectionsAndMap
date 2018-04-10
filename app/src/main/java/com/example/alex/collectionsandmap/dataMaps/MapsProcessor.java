@@ -1,4 +1,4 @@
-package com.example.alex.collectionsandmap.model;
+package com.example.alex.collectionsandmap.dataMaps;
 
 import com.example.alex.collectionsandmap.utils.Logger;
 import java.util.Map;

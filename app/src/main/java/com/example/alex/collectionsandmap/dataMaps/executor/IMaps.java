@@ -1,4 +1,4 @@
-package com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService;
+package com.example.alex.collectionsandmap.dataMaps.executor;
 
 import java.util.Map;
 

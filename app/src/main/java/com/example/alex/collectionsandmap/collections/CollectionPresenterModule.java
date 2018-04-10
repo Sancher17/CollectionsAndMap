@@ -2,12 +2,8 @@ package com.example.alex.collectionsandmap.collections;
 
 import com.example.alex.collectionsandmap.dataCollections.CollectionsData;
 import com.example.alex.collectionsandmap.dataCollections.CollectionsRepository;
-import com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService.ExecutorCollection;
-import com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService.ExecutorCollectionCallback;
-import com.example.alex.collectionsandmap.model.CollectionsProcessor;
-import com.example.alex.collectionsandmap.model.ICollectionsProcessor;
-
-import javax.inject.Inject;
+import com.example.alex.collectionsandmap.dataCollections.CollectionsProcessor;
+import com.example.alex.collectionsandmap.dataCollections.ICollectionsProcessor;
 
 import dagger.Module;
 import dagger.Provides;
@@ -24,4 +20,11 @@ public class CollectionPresenterModule {
     CollectionsRepository repository(){
         return new CollectionsData();
     }
+
+    @Provides
+    CollectionsContract.View provideView(){
+        return new CollectionsFragment();
+    }
+
+
 }

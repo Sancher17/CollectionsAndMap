@@ -1,4 +1,4 @@
-package com.example.alex.collectionsandmap.adapters;
+package com.example.alex.collectionsandmap.maps;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -8,7 +8,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.alex.collectionsandmap.R;
-import com.example.alex.collectionsandmap.model.repository.MapsData;
+import com.example.alex.collectionsandmap.dataMaps.MapsData;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 import java.util.List;

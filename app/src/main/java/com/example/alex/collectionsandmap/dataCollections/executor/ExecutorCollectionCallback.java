@@ -1,4 +1,4 @@
-package com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService;
+package com.example.alex.collectionsandmap.dataCollections.executor;
 
 
 public interface ExecutorCollectionCallback {

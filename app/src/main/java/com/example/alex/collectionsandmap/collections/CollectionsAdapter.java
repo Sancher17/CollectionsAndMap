@@ -1,10 +1,9 @@
-package com.example.alex.collectionsandmap.adapters;
+package com.example.alex.collectionsandmap.collections;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -13,7 +12,6 @@ import com.example.alex.collectionsandmap.dataCollections.CollectionsData;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -37,8 +35,12 @@ public class CollectionsAdapter extends RecyclerView.Adapter<CollectionsAdapter.
     @BindView(R.id.progress)
     ProgressBar progressBar;
 
+    private ArrayList list;
+
     @Inject
-    public CollectionsAdapter(ArrayList items) {}
+    public CollectionsAdapter() {
+        list = CollectionsData.list;
+    }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private CardView cardView;

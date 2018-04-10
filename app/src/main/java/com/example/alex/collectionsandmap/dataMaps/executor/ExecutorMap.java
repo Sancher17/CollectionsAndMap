@@ -1,9 +1,10 @@
-package com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService;
+package com.example.alex.collectionsandmap.dataMaps.executor;
 
 
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.alex.collectionsandmap.model.repository.MapsData;
+import com.example.alex.collectionsandmap.dataCollections.executor.ExecutorCollection;
+import com.example.alex.collectionsandmap.dataMaps.MapsData;
 import com.example.alex.collectionsandmap.utils.Logger;
 import com.example.alex.collectionsandmap.maps.MapsFragment;
 

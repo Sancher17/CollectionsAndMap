@@ -1,4 +1,4 @@
-package com.example.alex.collectionsandmap.model;
+package com.example.alex.collectionsandmap.dataCollections;
 
 import java.util.List;
 

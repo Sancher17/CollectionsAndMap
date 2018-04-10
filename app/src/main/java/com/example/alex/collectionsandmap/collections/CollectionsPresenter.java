@@ -1,13 +1,10 @@
 package com.example.alex.collectionsandmap.collections;
 
-import com.example.alex.collectionsandmap.dagger.AppComponent;
 import com.example.alex.collectionsandmap.dagger.AppInject;
-import com.example.alex.collectionsandmap.dataCollections.CollectionsData;
 import com.example.alex.collectionsandmap.dataCollections.CollectionsRepository;
-import com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService.ExecutorCollection;
-import com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService.ExecutorCollectionCallback;
-import com.example.alex.collectionsandmap.model.CollectionsProcessor;
-import com.example.alex.collectionsandmap.model.ICollectionsProcessor;
+import com.example.alex.collectionsandmap.dataCollections.executor.ExecutorCollection;
+import com.example.alex.collectionsandmap.dataCollections.executor.ExecutorCollectionCallback;
+import com.example.alex.collectionsandmap.dataCollections.ICollectionsProcessor;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 import java.util.ArrayList;
@@ -20,26 +17,25 @@ public class CollectionsPresenter implements CollectionsContract.Presenter, Coll
 
     private static Logger LOGGER = new Logger(CollectionsPresenter.class);
 
+    @Inject CollectionsContract.View view;
+
+    @Inject CollectionsRepository repository;
+
+    @Inject ICollectionsProcessor processor;
+
     // TODO: 09.04.2018 Can't inject with callback
     private ExecutorCollection executor = new ExecutorCollection(this);
 
-    private CollectionsContract.View view;
-
     @Inject
-    CollectionsRepository repository = new CollectionsData();
-
-    @Inject
-    ICollectionsProcessor processor;
-
-    @Inject
-    public CollectionsPresenter(CollectionsContract.View view) {
-        this.view = view;
+    public CollectionsPresenter() {
         AppInject.getComponent().inject(this);
     }
 
     @Override
     public void calculate() {
         LOGGER.log("calculate");
+
+//        view.onCalculationStarted();todo crash because no Context
 
         executor.doCalculateBackground(0, new ArrayList(), processor::addToStart);
         executor.doCalculateBackground(1, new LinkedList<>(), processor::addToStart);

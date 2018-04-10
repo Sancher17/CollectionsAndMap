@@ -1,19 +1,15 @@
 package com.example.alex.collectionsandmap.maps;
 
-import com.example.alex.collectionsandmap.model.BackgroundWork.ExecutorService.ExecutorMap;
-import com.example.alex.collectionsandmap.model.IMapProcessor;
-import com.example.alex.collectionsandmap.model.MapsProcessor;
-import com.example.alex.collectionsandmap.presenters.BasePresenter;
+import com.example.alex.collectionsandmap.dataMaps.executor.ExecutorMap;
+import com.example.alex.collectionsandmap.dataMaps.IMapProcessor;
+import com.example.alex.collectionsandmap.dataMaps.MapsProcessor;
 //import com.example.alex.collectionsandmap.presenters.IMapsPresenter;
 import com.example.alex.collectionsandmap.utils.Logger;
-
-import java.util.HashMap;
-import java.util.TreeMap;
 
 class MapsPresenter  {
 
     private int core = Runtime.getRuntime().availableProcessors();
-    private static Logger LOGGER = new Logger(BasePresenter.class);
+
     private ExecutorMap map = new ExecutorMap();
     private IMapProcessor processor = new MapsProcessor();
 

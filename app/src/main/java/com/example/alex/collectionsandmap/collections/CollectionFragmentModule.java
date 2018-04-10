@@ -7,12 +7,12 @@ import dagger.Provides;
 public class CollectionFragmentModule {
 
     @Provides
-    CollectionsContract.View provideView(){
-        return new CollectionsFragment();
+    CollectionsContract.Presenter provideCollectionsPresenter(){
+        return new CollectionsPresenter();
     }
 
     @Provides
-    CollectionsPresenter provideCollectionsPresenter(CollectionsContract.View view){
-        return new CollectionsPresenter(view);
+    CollectionsAdapter provideCollectionsAdapter(){
+        return new CollectionsAdapter();
     }
 }

@@ -15,7 +15,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.alex.collectionsandmap.R;
-import com.example.alex.collectionsandmap.adapters.CollectionsAdapter;
 import com.example.alex.collectionsandmap.dagger.AppInject;
 import com.example.alex.collectionsandmap.dataCollections.CollectionsData;
 import com.example.alex.collectionsandmap.utils.Logger;
@@ -35,17 +34,22 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
     // TODO: 08.04.2018 Don't work without STATIC adapter
 //    @Inject
 //    CollectionsAdapter adapter;
+//    public static CollectionsAdapter adapter = new CollectionsAdapter();
 
-    public static CollectionsAdapter adapter = new CollectionsAdapter(CollectionsData.list);
+    private static CollectionsAdapter adapter = new CollectionsAdapter();
 
     @Inject
-    CollectionsPresenter presenter;
+    CollectionsContract.Presenter presenter;
 
     @BindView(R.id.tab1_recycler)
     RecyclerView recyclerView;
 
     @BindView(R.id.editText_input_fragment)
     EditText interNumber;
+
+    @Inject
+    public CollectionsFragment(){
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -57,7 +61,8 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
 
         recyclerView = root.findViewById(R.id.tab1_recycler);
 
-        AppInject.getComponent().inject(this); //inject method
+       getInject();
+
         //creating first data
         presenter.createData();
 

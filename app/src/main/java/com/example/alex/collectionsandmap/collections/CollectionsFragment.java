@@ -162,7 +162,6 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
         AppInject.getComponent().inject(this);
     }
 
-
     public void allItems(){
         for (int i = 0; i < 3; i++) {
             LOGGER.log(" action " + CollectionsData.list.get(i).getAction()
@@ -171,8 +170,6 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
                     + "\n result " + CollectionsData.list.get(i).getResultOfCalculation());
         }
     }
-
-
 
     // lifecycle
     @Override

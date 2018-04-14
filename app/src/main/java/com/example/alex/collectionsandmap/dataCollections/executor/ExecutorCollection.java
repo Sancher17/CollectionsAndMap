@@ -36,6 +36,8 @@ public class ExecutorCollection implements LifecycleExecutor {
     }
 
     public void startCalculation(){
+
+
         doCalculateBackground(0, new ArrayList(), processor::addToStart);
         doCalculateBackground(1, new LinkedList(), processor::addToStart);
         doCalculateBackground(2, new CopyOnWriteArrayList(), processor::addToStart);

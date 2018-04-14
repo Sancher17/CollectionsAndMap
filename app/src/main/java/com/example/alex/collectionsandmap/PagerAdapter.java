@@ -1,4 +1,4 @@
-package com.example.alex.collectionsandmap.adapters;
+package com.example.alex.collectionsandmap;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

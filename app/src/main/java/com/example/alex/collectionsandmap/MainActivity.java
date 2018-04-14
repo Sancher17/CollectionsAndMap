@@ -1,27 +1,17 @@
 package com.example.alex.collectionsandmap;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import com.example.alex.collectionsandmap.adapters.PagerAdapter;
-import com.example.alex.collectionsandmap.collections.CollectionsFragment;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -73,7 +63,12 @@ public class MainActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
             }
         });
+
+
     }
+
+
+
 
 
 

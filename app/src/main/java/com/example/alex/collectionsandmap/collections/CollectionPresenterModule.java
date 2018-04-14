@@ -11,10 +11,6 @@ import dagger.Provides;
 @Module
 public class CollectionPresenterModule {
 
-    @Provides
-    ICollectionsProcessor collectionsProcessor(){
-        return new CollectionsProcessor();
-    }
 
     @Provides
     CollectionsRepository repository(){

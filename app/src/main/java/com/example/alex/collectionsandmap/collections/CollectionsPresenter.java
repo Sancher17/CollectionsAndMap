@@ -21,7 +21,6 @@ public class CollectionsPresenter implements CollectionsContract.Presenter, Coll
 
     @Inject CollectionsRepository repository;
 
-    @Inject ICollectionsProcessor processor;
 
     // TODO: 09.04.2018 Can't inject with callback
     private ExecutorCollection executor = new ExecutorCollection(this);
@@ -34,36 +33,9 @@ public class CollectionsPresenter implements CollectionsContract.Presenter, Coll
     @Override
     public void calculate() {
         LOGGER.log("calculate");
+        executor.startCalculation();
 
-//        view.onCalculationStarted();todo crash because no Context
-
-        executor.doCalculateBackground(0, new ArrayList(), processor::addToStart);
-        executor.doCalculateBackground(1, new LinkedList<>(), processor::addToStart);
-        executor.doCalculateBackground(2, new CopyOnWriteArrayList(), processor::addToStart);
-
-        executor.doCalculateBackground(3, new ArrayList<>(), processor::addToMiddle);
-        executor.doCalculateBackground(4, new LinkedList<>(), processor::addToMiddle);
-        executor.doCalculateBackground(5, new CopyOnWriteArrayList(), processor::addToMiddle);
-
-        executor.doCalculateBackground(6, new ArrayList<>(), processor::addToEnd);
-        executor.doCalculateBackground(7, new LinkedList<>(), processor::addToEnd);
-        executor.doCalculateBackground(8, new CopyOnWriteArrayList(), processor::addToEnd);
-
-        executor.doCalculateBackground(9, new ArrayList<>(), processor::search);
-        executor.doCalculateBackground(10, new LinkedList<>(), processor::search);
-        executor.doCalculateBackground(11, new CopyOnWriteArrayList(), processor::search);
-
-        executor.doCalculateBackground(12, new ArrayList<>(), processor::removeStart);
-        executor.doCalculateBackground(13, new LinkedList<>(), processor::removeStart);
-        executor.doCalculateBackground(14, new CopyOnWriteArrayList(), processor::removeStart);
-
-        executor.doCalculateBackground(15, new ArrayList<>(), processor::removeMiddle);
-        executor.doCalculateBackground(16, new LinkedList<>(), processor::removeMiddle);
-        executor.doCalculateBackground(17, new CopyOnWriteArrayList(), processor::removeMiddle);
-
-        executor.doCalculateBackground(18, new ArrayList<>(), processor::removeEnd);
-        executor.doCalculateBackground(19, new LinkedList<>(), processor::removeEnd);
-        executor.doCalculateBackground(20, new CopyOnWriteArrayList(), processor::removeEnd);
+//        view.onCalculationStarted();//todo crash because no Context
     }
 
     @Override

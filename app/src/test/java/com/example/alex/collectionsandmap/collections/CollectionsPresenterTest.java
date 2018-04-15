@@ -1,6 +1,5 @@
 package com.example.alex.collectionsandmap.collections;
 
-import com.example.alex.collectionsandmap.dataCollections.CollectionsRepository;
 import com.example.alex.collectionsandmap.dataCollections.executor.ExecutorCollection;
 import com.example.alex.collectionsandmap.dataCollections.executor.ExecutorCollectionCallback;
 
@@ -10,9 +9,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import dagger.Module;
-
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.verify;
 
 

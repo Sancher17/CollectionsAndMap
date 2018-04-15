@@ -5,8 +5,6 @@ import android.content.Context;
 
 public interface BaseView {
 
-    void onStartCalculation();
-
     void onCalculationFinished();
 
     void onDataIsStillLoadingError();

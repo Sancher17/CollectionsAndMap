@@ -3,7 +3,7 @@ package com.example.alex.collectionsandmap.dataCollections.executor;
 import android.os.Handler;
 import android.os.Looper;
 
-import com.example.alex.collectionsandmap.dataCollections.CollectionsData;
+import com.example.alex.collectionsandmap.collections.CollectionsAdapter;
 import com.example.alex.collectionsandmap.dataCollections.CollectionsProcessor;
 import com.example.alex.collectionsandmap.dataCollections.ICollectionsProcessor;
 import com.example.alex.collectionsandmap.utils.Logger;
@@ -29,6 +29,8 @@ public class ExecutorCollection implements LifecycleExecutor {
 
     private ICollectionsProcessor processor = new CollectionsProcessor();
 
+    private CollectionsAdapter adapter = new CollectionsAdapter();
+
     @Inject
     public ExecutorCollection(ExecutorCollectionCallback callback){
         this.callback = callback;
@@ -36,7 +38,6 @@ public class ExecutorCollection implements LifecycleExecutor {
     }
 
     public void startCalculation(){
-
 
         doCalculateBackground(0, new ArrayList(), processor::addToStart);
         doCalculateBackground(1, new LinkedList(), processor::addToStart);
@@ -77,7 +78,7 @@ public class ExecutorCollection implements LifecycleExecutor {
             int result = func.start(list);
             new Handler(Looper.getMainLooper()).post(() -> {
                 LOGGER.log("run 3 " + Thread.currentThread());
-                CollectionsData.list.get(position).setResultOfCalculation(result);
+                adapter.items.get(position).setResultOfCalculation(result);
                 callback.responseHideProgress(position);
             });
         });
@@ -96,7 +97,6 @@ public class ExecutorCollection implements LifecycleExecutor {
         for (int i = 0; i < rest; i++) {
             countDownLatch.countDown();
         }
-
     }
 
     @Override

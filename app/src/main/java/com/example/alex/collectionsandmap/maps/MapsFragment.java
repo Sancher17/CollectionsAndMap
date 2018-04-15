@@ -34,10 +34,7 @@ public class MapsFragment extends Fragment implements MapsContract.View {
         return collectionsRecycler;
     }
 
-    @Override
-    public void onStartCalculation() {
 
-    }
 
     @Override
     public void onCalculationFinished() {

@@ -6,9 +6,10 @@ import dagger.Provides;
 @Module
 public class CollectionFragmentModule {
 
+
     @Provides
     CollectionsContract.Presenter provideCollectionsPresenter(){
-        return new CollectionsPresenter();
+        return CollectionsPresenter.getInstance();
     }
 
     @Provides

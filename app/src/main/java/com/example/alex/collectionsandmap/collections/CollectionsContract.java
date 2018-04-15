@@ -7,16 +7,18 @@ public interface CollectionsContract {
 
     interface View extends BaseView{
 
-        void onButtonClick();
-
         void showErrorEmptyNumber();
+
+        void attachPresenter();
     }
 
     interface Presenter extends BasePresenter{
 
-        void updateAdapterItem(int position);
+        void attachView(View view);
 
-        public void createData();
+        void detachView();
+
+
     }
 
 }

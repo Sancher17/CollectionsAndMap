@@ -27,8 +27,8 @@ public class CollectionsPresenter implements CollectionsContract.Presenter, Exec
 
     @Override
     public void detachView() {
+        LOGGER.log("detachView");
         view = null;
-
     }
 
     @Override

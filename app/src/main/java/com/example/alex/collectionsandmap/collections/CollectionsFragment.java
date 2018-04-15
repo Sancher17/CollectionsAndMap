@@ -40,31 +40,39 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
     @BindView(R.id.editText_input_fragment)
     EditText interNumber;
 
+    View root;
 
     @Override
     public void attachPresenter(){
-//        presenter = CollectionsPresenter.getInstance();
         presenter.attachView(this);
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LOGGER.log("onCreateView");
         Log.d(TAG, "onCreateView: ");
 
-        View root = inflater.inflate(R.layout.fragment_tab1, container, false);
+        if (root != null) {
+            ViewGroup parent = (ViewGroup) root.getParent();
+            if (parent != null) {
+                parent.removeAllViews();
+            }
+        }
+
+        root = inflater.inflate(R.layout.fragment_tab1, container, false);
+
         ButterKnife.bind(this, root);
 
         recyclerView = root.findViewById(R.id.tab1_recycler);
 
         AppInject.getComponent().inject(this);
 
-        attachPresenter();
-
         int numColumns = getContext().getResources().getInteger(R.integer.num_collections_columns);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numColumns));
         recyclerView.setAdapter(adapter);
 
+        Log.d(TAG, "onCreateView // root 2 "+ root.toString() );
         return root;
     }
 
@@ -193,14 +201,22 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
 
     @Override
     public void onStart() {
-        Log.d(TAG, "onStart: ");
         super.onStart();
+        Log.d(TAG, "onStart: ");
     }
+
+
 
     @Override
     public void onDestroyView() {
-        Log.d(TAG, "onDestroyView: ");
         super.onDestroyView();
+        Log.d(TAG, "onDestroyView: ");
+        if (root != null) {
+            ViewGroup parent = (ViewGroup) root.getParent();
+            if (parent != null) {
+                parent.removeAllViews();
+            }
+        }
     }
 }
 

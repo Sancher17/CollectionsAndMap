@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
+
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -64,11 +65,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
-
-
-
 
 
 

@@ -2,14 +2,16 @@ package com.example.alex.collectionsandmap.collections;
 
 import com.example.alex.collectionsandmap.dataCollections.executor.ExecutorCollection;
 import com.example.alex.collectionsandmap.dataCollections.executor.ExecutorCollectionCallback;
+import com.example.alex.collectionsandmap.constants.Constants;
+import com.example.alex.collectionsandmap.dataCollections.executor.LifecycleExecutor;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 public class CollectionsPresenter implements CollectionsContract.Presenter, ExecutorCollectionCallback {
 
     private static Logger LOGGER = new Logger(CollectionsPresenter.class);
 
-    private CollectionsContract.View view;
-    private ExecutorCollection executor;
+    private  CollectionsContract.View view;
+    private  LifecycleExecutor executor;
 
     private static CollectionsPresenter instance = null;
 
@@ -23,6 +25,7 @@ public class CollectionsPresenter implements CollectionsContract.Presenter, Exec
     @Override
     public void attachView(CollectionsContract.View view){
         this.view = view;
+
     }
 
     @Override
@@ -35,13 +38,30 @@ public class CollectionsPresenter implements CollectionsContract.Presenter, Exec
     public void calculate() {
         LOGGER.log("calculate");
         executor = new ExecutorCollection(this);
-        executor.startCalculation();
-        view.onCalculationStarted();
+        if (Constants.COUNT_OF_OPERATIONS_COLLECTIONS == 21){
+            executor.startCalculation();
+            view.showCalculationStarted();
+        }else {
+            view.showCalculationIsStillWorking();
+        }
+    }
+
+    @Override
+    public void stopСalculation(){
+        LOGGER.log("stopСalculation");
+        if (executor != null) {
+            executor.stopCalculation();
+            view.stopAllProgressBars();
+            view.updateAdapter();
+            view.showWait();
+        }else {
+            view.showCalculationNotStarted();
+        }
     }
 
     @Override
     public void responseShowProgress(int position) {
-        LOGGER.log("response " + position);
+//        LOGGER.log("response " + position);
         view.showProgressBar(position);
     }
 
@@ -49,5 +69,18 @@ public class CollectionsPresenter implements CollectionsContract.Presenter, Exec
     public void responseHideProgress(int position) {
         LOGGER.log("response " + position);
         view.hideProgressBar(position);
+        checkCountOfOperations();
+    }
+
+    public void calculationStopped(){
+        view.showCalculationStopped();
+    }
+
+    void checkCountOfOperations(){
+        if (Constants.COUNT_OF_OPERATIONS_COLLECTIONS == 0 ){
+            view.showCalculationFinished();
+            Constants.COUNT_OF_OPERATIONS_COLLECTIONS = 21;
+        }
+
     }
 }

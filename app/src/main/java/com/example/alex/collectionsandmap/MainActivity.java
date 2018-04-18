@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.ViewGroup;
 
 import com.example.alex.collectionsandmap.utils.Logger;
 
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.pager)
     ViewPager viewPager;
 
+    PagerAdapter pagerAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_2));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(pagerAdapter);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -87,6 +90,14 @@ public class MainActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         Log.d(TAG, "onDestroy: MainActivity");
+
+        // TODO: 16.04.2018 tried to resolve changing resourses
+        if (viewPager != null) {
+            ViewGroup parent = (ViewGroup) viewPager.getParent();
+            if (parent != null) {
+                parent.removeAllViews();
+            }
+        }
     }
 
    

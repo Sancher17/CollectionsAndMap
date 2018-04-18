@@ -2,9 +2,7 @@ package com.example.alex.collectionsandmap.dataCollections.executor;
 
 public interface LifecycleExecutor {
 
-    void start();
+    void startCalculation();
 
-    void stop();
-
-    boolean isRunning();
+    void stopCalculation();
 }

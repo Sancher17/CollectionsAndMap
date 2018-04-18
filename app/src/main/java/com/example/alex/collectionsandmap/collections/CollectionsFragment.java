@@ -40,25 +40,17 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
     @BindView(R.id.editText_input_fragment)
     EditText interNumber;
 
-    View root;
+    private View root;
 
     @Override
     public void attachPresenter(){
         presenter.attachView(this);
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LOGGER.log("onCreateView");
         Log.d(TAG, "onCreateView: ");
-
-        if (root != null) {
-            ViewGroup parent = (ViewGroup) root.getParent();
-            if (parent != null) {
-                parent.removeAllViews();
-            }
-        }
 
         root = inflater.inflate(R.layout.fragment_tab1, container, false);
 
@@ -72,6 +64,7 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), numColumns));
         recyclerView.setAdapter(adapter);
 
+
         Log.d(TAG, "onCreateView // root 2 "+ root.toString() );
         return root;
     }
@@ -83,7 +76,8 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
         // hide keyboard after inputted number
         View view = getActivity().getCurrentFocus();
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getActivity()
+                    .getSystemService(Context.INPUT_METHOD_SERVICE);
             if (imm != null) {
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
@@ -98,24 +92,51 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
         }
     }
 
+    @OnClick(R.id.button_stop)
+    public void clickButtonStop(){
+        presenter.stopСalculation();
+    }
+
     @Override
-    public void onCalculationFinished() {
+    public void stopAllProgressBars(){
+        for (int i = 0; i < 21; i++) {
+            adapter.items.get(i).setProgressBar(false);
+        }
+    }
+
+    @Override
+    public void showWait() {
+        Toast.makeText(getActivity(), "Wait calculation soon stopped", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showCalculationNotStarted() {
+        Toast.makeText(getActivity(), "Calculation is not started", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showCalculationStopped(){
+        Toast.makeText(getActivity(), "Calculation is stopped", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showCalculationFinished() {
         Toast.makeText(getActivity(), "Calculation is done", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onDataIsStillLoadingError() {
+    public void showCalculationIsStillWorking() {
         Toast.makeText(getActivity(), "Calculation is still running!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void onCalculationStarted(){
+    public void showCalculationStarted(){
         Toast.makeText(getContext(), "Calculation is starting", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showErrorEmptyNumber() {
-        Toast.makeText(getContext(), " Введите число", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Enter number", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -132,7 +153,7 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
 
     @Override
     public void showProgressBar(int position){
-        LOGGER.log("showProgressBar");
+//        LOGGER.log("showProgressBar");
         adapter.items.get(position).setProgressBar(true);
         updateItemAdapter(position);
     }
@@ -211,12 +232,12 @@ public final class CollectionsFragment extends Fragment implements CollectionsCo
     public void onDestroyView() {
         super.onDestroyView();
         Log.d(TAG, "onDestroyView: ");
-        if (root != null) {
-            ViewGroup parent = (ViewGroup) root.getParent();
-            if (parent != null) {
-                parent.removeAllViews();
-            }
-        }
+//        if (root != null) {
+//            ViewGroup parent = (ViewGroup) root.getParent();
+//            if (parent != null) {
+//                parent.removeAllViews();
+//            }
+//        }
     }
 }
 

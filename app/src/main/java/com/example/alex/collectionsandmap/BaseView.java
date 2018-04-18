@@ -1,13 +1,10 @@
 package com.example.alex.collectionsandmap;
 
-
-import android.content.Context;
-
 public interface BaseView {
 
-    void onCalculationFinished();
+    void showCalculationFinished();
 
-    void onDataIsStillLoadingError();
+    void showCalculationIsStillWorking();
 
     void updateAdapter();
 
@@ -17,6 +14,13 @@ public interface BaseView {
 
     void hideProgressBar(int position);
 
-    void onCalculationStarted();
+    void showCalculationStarted();
 
+    void showCalculationStopped();
+
+    void stopAllProgressBars();
+
+    void showWait();
+
+    void showCalculationNotStarted();
 }

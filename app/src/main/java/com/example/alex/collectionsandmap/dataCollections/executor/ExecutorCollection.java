@@ -4,8 +4,10 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.example.alex.collectionsandmap.collections.CollectionsAdapter;
+import com.example.alex.collectionsandmap.collections.CollectionsPresenter;
 import com.example.alex.collectionsandmap.dataCollections.CollectionsProcessor;
 import com.example.alex.collectionsandmap.dataCollections.ICollectionsProcessor;
+import com.example.alex.collectionsandmap.constants.Constants;
 import com.example.alex.collectionsandmap.utils.Logger;
 
 import java.util.ArrayList;
@@ -15,29 +17,32 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import javax.inject.Inject;
+import java.util.concurrent.TimeUnit;
 
 public class ExecutorCollection implements LifecycleExecutor {
 
     private static Logger LOGGER = new Logger(ExecutorCollection.class);
     private int core = Runtime.getRuntime().availableProcessors();
-    private ExecutorService executor = Executors.newFixedThreadPool(core+1);
-    private final CountDownLatch countDownLatch;
+
+    private ExecutorService executor = Executors.newFixedThreadPool(core + 1);
 
     private ExecutorCollectionCallback callback;
 
-    private ICollectionsProcessor processor = new CollectionsProcessor();
+    private ICollectionsProcessor processor;
 
     private CollectionsAdapter adapter = new CollectionsAdapter();
 
-    @Inject
-    public ExecutorCollection(ExecutorCollectionCallback callback){
+    private CollectionsPresenter presenter;
+
+
+    public ExecutorCollection(ExecutorCollectionCallback callback) {
         this.callback = callback;
-        countDownLatch = null;
     }
 
-    public void startCalculation(){
+    @Override
+    public void startCalculation() {
+
+        processor = new CollectionsProcessor();
 
         doCalculateBackground(0, new ArrayList(), processor::addToStart);
         doCalculateBackground(1, new LinkedList(), processor::addToStart);
@@ -69,7 +74,7 @@ public class ExecutorCollection implements LifecycleExecutor {
 
     }
 
-    public void doCalculateBackground(final int position, List list, ICollections func){
+    public void doCalculateBackground(final int position, List list, ICollections func) {
         LOGGER.log("doCalculateBackground // position " + position);
         LOGGER.log("run 0 " + Thread.currentThread());
         callback.responseShowProgress(position);
@@ -79,28 +84,31 @@ public class ExecutorCollection implements LifecycleExecutor {
             new Handler(Looper.getMainLooper()).post(() -> {
                 LOGGER.log("run 3 " + Thread.currentThread());
                 adapter.items.get(position).setResultOfCalculation(result);
+                Constants.COUNT_OF_OPERATIONS_COLLECTIONS -= 1;
                 callback.responseHideProgress(position);
             });
         });
     }
 
-
-
     @Override
-    public void start() {
-
-    }
-
-    @Override
-    public void stop() {
-        int rest = executor.shutdownNow().size();
-        for (int i = 0; i < rest; i++) {
-            countDownLatch.countDown();
-        }
-    }
-
-    @Override
-    public boolean isRunning() {
-        return false;
+    public void stopCalculation() {
+        executor.shutdownNow();
+        ExecutorService interrupt = Executors.newFixedThreadPool(1);
+        interrupt.submit(() -> {
+            while (!executor.isTerminated()) {
+                try {
+                    Thread.sleep(500);
+                    LOGGER.log("isTerminated sleep");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            new Handler(Looper.getMainLooper()).post(() -> {
+                presenter = CollectionsPresenter.getInstance();
+                presenter.calculationStopped();
+                Constants.COUNT_OF_OPERATIONS_COLLECTIONS = 21;
+                LOGGER.log("isTerminated // " + executor.isTerminated());
+            });
+        });
     }
 }

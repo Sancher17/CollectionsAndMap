@@ -22,7 +22,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                return CollectionsFragment.newInstance();
+                return new CollectionsFragment();
             case 1:
                 return new MapsFragment();
             default:

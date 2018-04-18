@@ -8,9 +8,6 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 
-/**
- * created on 02.04.2018
- */
 @Component(modules = {
         CollectionFragmentModule.class,
 })

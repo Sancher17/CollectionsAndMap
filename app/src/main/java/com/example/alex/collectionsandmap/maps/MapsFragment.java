@@ -37,12 +37,12 @@ public class MapsFragment extends Fragment implements MapsContract.View {
 
 
     @Override
-    public void onCalculationFinished() {
+    public void showCalculationFinished() {
 
     }
 
     @Override
-    public void onDataIsStillLoadingError() {
+    public void showCalculationIsStillWorking() {
 
     }
 
@@ -67,7 +67,27 @@ public class MapsFragment extends Fragment implements MapsContract.View {
     }
 
     @Override
-    public void onCalculationStarted() {
+    public void showCalculationStarted() {
+
+    }
+
+    @Override
+    public void showCalculationStopped() {
+
+    }
+
+    @Override
+    public void stopAllProgressBars() {
+
+    }
+
+    @Override
+    public void showWait() {
+
+    }
+
+    @Override
+    public void showCalculationNotStarted() {
 
     }
 

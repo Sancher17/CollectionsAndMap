@@ -22,9 +22,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static int GET_POSITION_TAB = 0;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-
     @BindView(R.id.tab_layout)
     TabLayout tabLayout;
 
@@ -40,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        setSupportActionBar(toolbar);
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_1));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.tab_2));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
@@ -49,34 +45,16 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(pagerAdapter);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                toolbar.setTitle(tab.getText());
-                LOGGER.log("onTabSelected // Title: " + tab.getText());
-                viewPager.setCurrentItem(tab.getPosition());
-                GET_POSITION_TAB = tab.getPosition();
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        });
+        tabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(viewPager));
 
     }
-
 
 
     // lifecycle
     @Override
     public void onResume() {
         super.onResume();
-        Log.d(TAG, "onResume: MainActivity" );
+        Log.d(TAG, "onResume: MainActivity");
     }
 
     @Override
@@ -100,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-   
+
     @Override
     public void onStart() {
         Log.d(TAG, "onStart: MainActivity");

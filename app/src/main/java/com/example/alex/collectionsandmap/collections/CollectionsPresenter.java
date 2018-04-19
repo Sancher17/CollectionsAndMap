@@ -1,48 +1,39 @@
 package com.example.alex.collectionsandmap.collections;
 
+import com.example.alex.collectionsandmap.arch.PresenterBase;
 import com.example.alex.collectionsandmap.dataCollections.executor.ExecutorCollection;
 import com.example.alex.collectionsandmap.dataCollections.executor.ExecutorCollectionCallback;
 import com.example.alex.collectionsandmap.constants.Constants;
 import com.example.alex.collectionsandmap.dataCollections.executor.LifecycleExecutor;
 import com.example.alex.collectionsandmap.utils.Logger;
 
-public class CollectionsPresenter implements CollectionsContract.Presenter, ExecutorCollectionCallback {
+public class CollectionsPresenter extends PresenterBase<CollectionsContract.View> implements CollectionsContract.Presenter, ExecutorCollectionCallback {
 
     private static Logger LOGGER = new Logger(CollectionsPresenter.class);
 
-    private  CollectionsContract.View view;
     private  LifecycleExecutor executor;
 
-    private static CollectionsPresenter instance = null;
-
-    public static CollectionsPresenter getInstance() {
-        if (instance == null) {
-            return instance = new CollectionsPresenter();
-        }
-        return instance;
-    }
 
     @Override
     public void attachView(CollectionsContract.View view){
-        this.view = view;
-
+       super.attachView(view);
     }
 
     @Override
     public void detachView() {
         LOGGER.log("detachView");
-        view = null;
+        super.detachView();
     }
 
     @Override
     public void calculate() {
         LOGGER.log("calculate");
-        executor = new ExecutorCollection(this);
+        executor = new ExecutorCollection(this, this);
         if (Constants.COUNT_OF_OPERATIONS_COLLECTIONS == 21){
             executor.startCalculation();
-            view.showCalculationStarted();
+            getView().showCalculationStarted();
         }else {
-            view.showCalculationIsStillWorking();
+            getView().showCalculationIsStillWorking();
         }
     }
 
@@ -51,34 +42,37 @@ public class CollectionsPresenter implements CollectionsContract.Presenter, Exec
         LOGGER.log("stopСalculation");
         if (executor != null) {
             executor.stopCalculation();
-            view.stopAllProgressBars();
-            view.updateAdapter();
-            view.showWait();
+            getView().stopAllProgressBars();
+            getView().updateAdapter();
+            getView().showWait();
         }else {
-            view.showCalculationNotStarted();
+            getView().showCalculationNotStarted();
         }
     }
 
     @Override
     public void responseShowProgress(int position) {
 //        LOGGER.log("response " + position);
-        view.showProgressBar(position);
+        getView().showProgressBar(position);
     }
 
     @Override
     public void responseHideProgress(int position) {
         LOGGER.log("response " + position);
-        view.hideProgressBar(position);
+        getView().hideProgressBar(position);
         checkCountOfOperations();
     }
 
+
+    @Override
     public void calculationStopped(){
-        view.showCalculationStopped();
+        getView().showCalculationStopped();
+        executor = null;
     }
 
     void checkCountOfOperations(){
         if (Constants.COUNT_OF_OPERATIONS_COLLECTIONS == 0 ){
-            view.showCalculationFinished();
+            getView().showCalculationFinished();
             Constants.COUNT_OF_OPERATIONS_COLLECTIONS = 21;
         }
 

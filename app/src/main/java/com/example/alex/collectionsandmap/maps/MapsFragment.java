@@ -15,7 +15,7 @@ import com.example.alex.collectionsandmap.utils.Logger;
 public class MapsFragment extends Fragment implements MapsContract.View {
 
     private static Logger LOGGER = new Logger(MapsFragment.class);
-    public static MapsAdapter adapter;
+    public MapsAdapter adapter;
     MapsData maps = new MapsData();
 
 
@@ -26,7 +26,6 @@ public class MapsFragment extends Fragment implements MapsContract.View {
 
         RecyclerView collectionsRecycler = root.findViewById(R.id.tab2_recycler);
 
-
         adapter = new MapsAdapter(MapsData.list);
         collectionsRecycler.setAdapter(adapter);
         collectionsRecycler.setLayoutManager(new GridLayoutManager(getActivity(), 2));
@@ -35,61 +34,6 @@ public class MapsFragment extends Fragment implements MapsContract.View {
     }
 
 
-
-    @Override
-    public void showCalculationFinished() {
-
-    }
-
-    @Override
-    public void showCalculationIsStillWorking() {
-
-    }
-
-    @Override
-    public void updateAdapter() {
-
-    }
-
-    @Override
-    public void updateItemAdapter(int position) {
-
-    }
-
-    @Override
-    public void showProgressBar(int position) {
-
-    }
-
-    @Override
-    public void hideProgressBar(int position) {
-
-    }
-
-    @Override
-    public void showCalculationStarted() {
-
-    }
-
-    @Override
-    public void showCalculationStopped() {
-
-    }
-
-    @Override
-    public void stopAllProgressBars() {
-
-    }
-
-    @Override
-    public void showWait() {
-
-    }
-
-    @Override
-    public void showCalculationNotStarted() {
-
-    }
 
     @Override
     public void onButtonClick() {

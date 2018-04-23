@@ -3,7 +3,6 @@ package com.example.alex.collectionsandmap.arch;
 
 public abstract class PresenterBase <T extends MvpView >  implements  MvpPresenter <T>{
 
-
     private T view;
 
     @Override
@@ -18,11 +17,6 @@ public abstract class PresenterBase <T extends MvpView >  implements  MvpPresent
 
     public T getView() {
         return view;
-    }
-
-    @Override
-    public void viewIsReady() {
-
     }
 
 }
